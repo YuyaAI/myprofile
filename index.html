@@ -3,948 +3,322 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>池田 悠耶 | プロフィール</title>
+
+    <title>Yuya Ikeda | Profile</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
+        /* --- デザインシステムの定義 --- */
+        :root {
+            --bg-color: #ffffff;
+            --surface-color: #f8f9fa;
+            --primary-text-color: #212529;
+            --secondary-text-color: #495057;
+            --accent-color: #0d6efd;
+            --border-color: #dee2e6;
+
+            --font-primary: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+            --font-secondary: 'Noto Sans JP', sans-serif;
+        }
+
+        /* --- 基本設定 & 全画面対応 --- */
+        *, *::before, *::after {
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 25%, #2d2d5f 50%, #1cf957 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #333;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* 動的背景エフェクト */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(28, 249, 87, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(30, 244, 129, 0.1) 0%, transparent 50%);
-            animation: bgFloat 20s ease-in-out infinite;
-        }
-
-        @keyframes bgFloat {
-            0%, 100% { 
-                background-position: 0% 0%, 100% 100%;
-                filter: hue-rotate(0deg);
-            }
-            50% { 
-                background-position: 100% 100%, 0% 0%;
-                filter: hue-rotate(30deg);
-            }
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--primary-text-color);
+            font-family: var(--font-secondary);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
-            max-width: 900px;
-            width: 95%;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(30px);
-            border-radius: 24px;
-            box-shadow: 
-                0 32px 64px rgba(0, 0, 0, 0.2),
-                0 0 0 1px rgba(255, 255, 255, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
+            max-width: 1100px;
+            width: 90%;
+            margin: 0 auto;
+        }
+        
+        /* --- メインコンテンツ --- */
+        .main-content {
+            padding: 80px 0;
         }
 
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(28, 249, 87, 0.5), transparent);
-        }
-
-        .container:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 
-                0 40px 80px rgba(0, 0, 0, 0.25),
-                0 0 0 1px rgba(255, 255, 255, 0.2);
-        }
-
-        .header {
-            background: linear-gradient(135deg, #1a1a3e 0%, #2d2d5f 50%, #0f0f23 100%);
-            color: white;
-            padding: 50px 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 200%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(28, 249, 87, 0.1), transparent);
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 40px;
         }
 
         .profile-image {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            border: 4px solid rgba(28, 249, 87, 0.3);
-            margin: 0 auto 25px;
-            position: relative;
-            z-index: 1;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 
-                0 16px 32px rgba(28, 249, 87, 0.3),
-                inset 0 2px 4px rgba(255, 255, 255, 0.2);
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #1cf957, #1ef481, #20f5a3);
-        }
-
-        .profile-image:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 
-                0 20px 40px rgba(28, 249, 87, 0.4),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            flex-shrink: 0;
         }
 
         .profile-image img {
-            width: 100%;
-            height: 100%;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
             object-fit: cover;
-            border-radius: 50%;
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        .profile-image:hover img {
-            transform: scale(1.05);
+        .profile-text {
+            flex-grow: 1;
+            text-align: left;
         }
 
-        /* 画像が読み込まれない場合のフォールバック */
-        .profile-image .fallback-emoji {
-            font-size: 52px;
-            color: white;
-            display: none;
-        }
-
-        .profile-image.no-image .fallback-emoji {
-            display: block;
-        }
-
-        .profile-image.no-image img {
-            display: none;
-        }
-
-        .name {
+        .profile-text h1 {
+            font-family: var(--font-primary);
             font-size: 2.8rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
-            background: linear-gradient(135deg, #ffffff, #f0f0f0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        /* コンタクトセクションのスタイル */
-        .contact-section {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid rgba(28, 249, 87, 0.1);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #1cf957, #1ef481);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-
-        .contact-item {
-            background: white;
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(28, 249, 87, 0.1);
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .contact-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #1cf957, #1ef481);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            margin: 0 auto 15px;
-            box-shadow: 0 4px 12px rgba(28, 249, 87, 0.3);
-        }
-
-        .contact-title {
             font-weight: 700;
-            color: #1a1a3e;
-            margin-bottom: 8px;
+            margin: 0 0 5px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .profile-text .subtitle {
             font-size: 1.1rem;
+            color: var(--secondary-text-color);
+            margin-top: 0;
+            font-weight: 400;
         }
 
-        .contact-link {
-            color: #6c757d;
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-        }
-
-        .contact-link:hover {
-            color: #1cf957;
-        }
-
-        .contact-info {
-            color: #6c757d;
-            font-size: 0.95rem;
-            line-height: 1.4;
-        }
-
-        .content {
-            padding: 50px 40px;
-        }
-
-        .section {
-            margin-bottom: 40px;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        .section:nth-child(1) { animation-delay: 0.1s; }
-        .section:nth-child(2) { animation-delay: 0.2s; }
-        .section:nth-child(3) { animation-delay: 0.3s; }
-        .section:nth-child(4) { animation-delay: 0.4s; }
-        .section:nth-child(5) { animation-delay: 0.5s; }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section-title {
-            font-size: 1.6rem;
-            color: #1a1a3e;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            font-weight: 700;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 44px;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, #1cf957, #1ef481);
-            border-radius: 2px;
-        }
-
-        .section-icon {
-            width: 32px;
-            height: 32px;
-            margin-right: 12px;
-            background: linear-gradient(135deg, #1cf957, #1ef481);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 16px;
-            box-shadow: 0 4px 12px rgba(28, 249, 87, 0.3);
-        }
-
-        .affiliation {
-            background: linear-gradient(135deg, #f8fffe 0%, #f0fffc 100%);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(28, 249, 87, 0.1);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .affiliation::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #1cf957, #1ef481);
-        }
-
-        .affiliation h3 {
-            color: #1a1a3e;
-            margin-bottom: 8px;
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-
-        .affiliation p {
-            color: #6c757d;
+        .profile-text .message {
+            font-size: 1.1rem;
             font-style: italic;
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-        }
-
-        .affiliation p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* 研究タブスタイル */
-        .research-tabs {
             margin-top: 20px;
-        }
-
-        .tab-buttons {
-            display: flex;
-            gap: 10px;
             margin-bottom: 20px;
-            flex-wrap: wrap;
+            color: var(--secondary-text-color);
+            border-left: 3px solid var(--accent-color);
+            padding-left: 15px;
         }
 
-        .tab-button {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 25px;
-            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
-            color: #666;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .tab-button.active {
-            background: linear-gradient(135deg, #1cf957, #1ef481);
+        .contact-button {
+            display: inline-block;
+            background-color: var(--accent-color);
             color: white;
-            box-shadow: 0 4px 12px rgba(28, 249, 87, 0.3);
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: var(--font-primary);
+            font-size: 0.9rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .tab-button:hover {
+        .contact-button:hover {
             transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(13, 110, 253, 0.3);
         }
 
-        .tab-content {
-            display: none;
-            background: linear-gradient(135deg, #fff9f0 0%, #fff5e6 100%);
-            padding: 25px;
-            border-radius: 16px;
-            border-left: 4px solid #ff9500;
-            box-shadow: 0 6px 20px rgba(255, 149, 0, 0.1);
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 15px;
-        }
-
-        .skill-tag {
-            background: rgba(28, 249, 87, 0.1);
-            color: #1a5c2a;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            border: 1px solid rgba(28, 249, 87, 0.2);
-        }
-
-        .certifications {
+        /* --- 詳細セクション（グリッドレイアウト） --- */
+        .details-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 80px;
         }
 
-        .cert-item {
-            background: white;
+        .detail-card {
+            background-color: var(--surface-color);
             padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(28, 249, 87, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
-        .cert-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #1cf957, #1ef481);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .cert-item:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
-        }
-
-        .cert-item:hover::before {
-            transform: scaleX(1);
-        }
-
-        .cert-title {
-            font-weight: 700;
-            color: #1a1a3e;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-        }
-
-        .cert-org {
-            color: #6c757d;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-
-        .downloads {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-        }
-
-        .download-btn {
-            background: linear-gradient(135deg, #f4f01e 0%, #f4f01e 100%);
-            color: rgb(3, 2, 2);
-            border: none;
-            padding: 18px 30px;
-            border-radius: 16px;
-            cursor: pointer;
-            font-size: 1.05rem;
-            font-weight: 600;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        .detail-card h2 {
+            font-size: 1.3rem;
+            margin-top: 0;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            box-shadow: 0 8px 24px rgba(28, 249, 87, 0.3);
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .detail-card p {
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .detail-card ul {
+            padding-left: 0;
+            list-style-type: none;
+            margin: 0;
+        }
+
+        .detail-card li {
+            padding-left: 20px;
             position: relative;
-            overflow: hidden;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
         }
 
-        .download-btn::before {
-            content: '';
+        .detail-card li::before {
+            content: '•';
+            color: var(--accent-color);
+            font-size: 1.2rem;
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .download-btn:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 16px 32px rgba(28, 249, 87, 0.4);
-        }
-
-        .download-btn:hover::before {
-            left: 100%;
-        }
-
-        .download-btn:active {
-            transform: translateY(-2px) scale(1.02);
-        }
-
-        .download-icon {
-            margin-right: 10px;
-            font-size: 1.3rem;
-        }
-
-        /* スマホ対応の強化 */
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            .container {
-                width: 100%;
-                border-radius: 20px;
-            }
-            
-            .name {
-                font-size: 2.2rem;
-                line-height: 1.2;
-            }
-            
-            .content {
-                padding: 30px 25px;
-            }
-            
-            .header {
-                padding: 40px 25px;
-            }
-            
-            .profile-image {
-                width: 140px;
-                height: 140px;
-            }
-            
-            .profile-image .fallback-emoji {
-                font-size: 44px;
-            }
-            
-            .social-links {
-                gap: 15px;
-            }
-            
-            .social-link {
-                width: 45px;
-                height: 45px;
-                font-size: 18px;
-            }
-            
-            .contact-section {
-                padding: 25px;
-            }
-            
-            .contact-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 20px;
-            }
-            
-            .section {
-                margin-bottom: 35px;
-            }
-            
-            .section-title {
-                font-size: 1.4rem;
-            }
-            
-            .affiliation {
-                padding: 20px;
-            }
-            
-            .tab-buttons {
-                gap: 8px;
-            }
-            
-            .tab-button {
-                padding: 10px 16px;
-                font-size: 0.85rem;
-            }
-            
-            .tab-content {
-                padding: 20px;
-            }
-            
-            .certifications {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .downloads {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .download-btn {
-                padding: 16px 25px;
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .name {
-                font-size: 1.9rem;
-            }
-            
-            .content {
-                padding: 25px 20px;
-            }
-            
-            .header {
-                padding: 35px 20px;
-            }
-            
-            .profile-image {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .profile-image .fallback-emoji {
-                font-size: 38px;
-            }
-            
-            .social-links {
-                gap: 12px;
-            }
-            
-            .social-link {
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
-            }
-            
-            .contact-section {
-                padding: 20px;
-            }
-            
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .contact-item {
-                padding: 18px;
-            }
-            
-            .section-title {
-                font-size: 1.2rem;
-            }
-            
-            .cert-item {
-                padding: 20px;
-            }
-            
-            .affiliation {
-                padding: 18px;
-            }
-        }
-
-        .floating-particles {
-            position: fixed;
-            top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
+            top: -2px;
         }
 
-        .particle {
-            position: absolute;
-            background: rgba(28, 249, 87, 0.1);
-            border-radius: 50%;
-            animation: floatParticle 15s infinite linear;
+        /* --- フッター --- */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--secondary-text-color);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 80px;
         }
 
-        @keyframes floatParticle {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
+        /* --- スマホ表示用の調整 (レスポンシブデザイン) --- */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 40px 0;
             }
-            10% {
-                opacity: 1;
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
             }
-            90% {
-                opacity: 1;
+            .profile-text {
+                text-align: center;
             }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
+            .profile-image {
+                margin-bottom: 20px;
+            }
+            .profile-text h1 {
+                font-size: 2.2rem;
+            }
+            .details-grid {
+                grid-template-columns: 1fr;
+                margin-top: 60px;
             }
         }
 
-        /* スクロール時のスムーズな表示 */
-        .scroll-reveal {
+        /* --- スクロールアニメーション --- */
+        .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
+            transform: translateY(20px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
         }
 
-        .scroll-reveal.revealed {
+        .reveal.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <div class="bg-animation"></div>
-    <div class="floating-particles" id="particles"></div>
-    
-    <div class="container">
-        <div class="header">
-            <div class="profile-image" id="profileImage">
-                <img src="llx.jpg" alt="池田悠耶のプロフィール写真" id="profileImg">
-                <div class="fallback-emoji">👨‍💻</div>
-            </div>
-            <h1 class="name">池田 悠耶<br><span style="font-size: 0.7em; font-weight: 400;">(YUYA IKEDA)</span></h1>
-        </div>
-        
-        <div class="content">
-            <div class="section">
-                <h2 class="section-title">
-                    <div class="section-icon">🏫</div>
-                    所属
-                </h2>
-                <div class="affiliation">
-                    <h3>長崎県立大学大学院</h3>
-                    <p>地域創生研究科・情報工学専攻</p>
-                    <p>２０２５年４月〜現在</p>
-                </div>
-                
-                <div class="research-tabs">
-                    <div class="tab-buttons">
-                        <button class="tab-button active" onclick="switchTab('data-analysis')">データ分析</button>
-                        <button class="tab-button" onclick="switchTab('programming')">プログラミング</button>
-                    </div>
-                    
-                    <div id="data-analysis" class="tab-content active">
-                        <h4>📊 データ分析</h4>
-                        <p>統計学的手法を用いた研究</p>
-                        <div class="skill-tags">
-                            <span class="skill-tag">統計学</span>
-                            <span class="skill-tag">２標本t検定</span>
-                        </div>
-                    </div>
-                    
-                    <div id="programming" class="tab-content">
-                        <h4>💻 プログラミング</h4>
-                        <p>バイブコーディング手法に関する研究</p>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">HTML</span>
-                            <span class="skill-tag">CSS</span>
-                            <span class="skill-tag">Java Script</span>
-                        </div>
-                    </div>
-                    
-                    
-                </div>
-            </div>
-            
-            <div class="section">
-                <h2 class="section-title">
-                    <div class="section-icon">🏆</div>
-                    資格・認定
-                </h2>
-                <div class="certifications">
-                    <div class="cert-item">
-                        <div class="cert-title">Google Data Analytics</div>
-                        <div class="cert-org">Coursera Professional Certificate</div>
-                    </div>
-                    <div class="cert-item">
-                        <div class="cert-title">Google AI Essentials</div>
-                        <div class="cert-org">Coursera Professional Certificate</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section">
-                <h2 class="section-title">
-                    <div class="section-icon">📁</div>
-                    ダウンロード
-                </h2>
-                <div class="downloads">
-                    <button class="download-btn" onclick="downloadFile('cv')">
-                        <span class="download-icon">📄</span>
-                        準備中
-                    </button>
-                   
-                </div>
-            </div>
 
-            <div class="section">
-                <h2 class="section-title">
-                    <div class="section-icon">📞</div>
-                    コンタクト
-                </h2>
-                <div class="contact-section">
-                    <div class="contact-grid">
-                        <div class="contact-item">
-                            <div class="contact-icon">📧</div>
-                            <div class="contact-title">Email</div>
-                            <a href="mailto:mc225001@sun.ac.jp" class="contact-link">mc225001@sun.ac.jp</a>
-                        </div>
-                        
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">💼</div>
-                            <div class="contact-title">LinkedIn</div>
-                            <a href="https://www.linkedin.com/in/yuya-ikeda-b20ba235b?" class="contact-link" target="_blank">外部プロフィールを見る</a>
-                        </div>
-                        
-                        
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">🏫</div>
-                            <div class="contact-title">所属機関</div>
-                            <div class="contact-info">長崎県立大学大学院<br>地域創生研究科・情報工学専攻</div>
-                        </div>
-                    </div>
+    <main class="main-content">
+        <div class="container">
+
+            <section class="profile-section">
+                <div class="profile-image reveal">
+                    <img src="llm.png" alt="プロフィール写真">
                 </div>
-            </div>
+                <div class="profile-text reveal">
+                    <h1>池田 悠耶（YUYA IKEDA）</h1>
+                    <p class="subtitle">所属：長崎県立大学院 情報工学専攻</p>
+                    <p class="message">"Leveraging data analytics to uncover transformative insights, driving intelligent decision-making and societal advancement."</p>
+                    <a href="mailto:yuya-i1@proton.me" class="contact-button">Contact Me</a>
+                </div>
+            </section>
+
+            <section class="details-grid">
+
+                <div class="detail-card reveal">
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                        Research
+                    </h2>
+                    <p>
+                        「データ分析を専門に研究しています。一見、無関係に見える数字や情報の関連性を見つけ出し、パターンを読み解くことで、ビジネスや社会が抱える課題の解決に繋げています。」
+                    </p>
+                </div>
+
+                <div class="detail-card reveal">
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        Career
+                    </h2>
+                    <ul>
+                        <li>2025年~: 長崎県立大学院 情報工学専攻 人間情報科学</li>
+                    </ul>
+                </div>
+
+                <div class="detail-card reveal">
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                        Certifications
+                    </h2>
+                    <ul>
+                        <li>Google AI Essential</li>
+                        <li>Google Data Analytics</li>
+                    </ul>
+                </div>
+
+                <div class="detail-card reveal">
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        Skills
+                    </h2>
+                    <ul>
+                        <li>Python（データ分析、機械学習）</li>
+                        <li>自然言語処理 (NLP)</li>
+                        <li>深層学習 (Deep Learning)</li>
+                        <li>R言語</li>
+                        <li>HTML, CSS, JavaScript</li>
+                    </ul>
+                </div>
+
+            </section>
         </div>
-    </div>
+    </main>
+
+    <footer class="reveal">
+        <div class="container">
+            <p>&copy; 2025 Yuya Ikeda. All Rights Reserved.</p>
+        </div>
+    </footer>
+
 
     <script>
-        // タブ切り替え機能
-        function switchTab(tabId) {
-            // すべてのタブボタンから active を削除
-            document.querySelectorAll('.tab-button').forEach(btn => {
-                btn.classList.remove('active');
+        // --- スクロールで要素を順番に表示させるJavaScript ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const targets = document.querySelectorAll('.reveal');
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // is-visibleクラスを付与してアニメーションを開始
+                        entry.target.classList.add('is-visible');
+                        
+                        // 一度表示したら監視を停止
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: '0px',
+                threshold: 0.1 // 要素が10%見えたら実行
             });
-            
-            // すべてのタブコンテンツを非表示
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
+
+            // 各要素を監視対象に追加
+            targets.forEach(target => {
+                observer.observe(target);
             });
-            
-            // クリックされたタブボタンに active を追加
-            event.target.classList.add('active');
-            
-            // 対応するタブコンテンツを表示
-            document.getElementById(tabId).classList.add('active');
-        }
-
-        // 画像読み込みエラーハンドリング
-        function handleImageError() {
-            const profileImage = document.getElementById('profileImage');
-            profileImage.classList.add('no-image');
-        }
-
-        // ファイルダウンロード機能
-        function downloadFile(type) {
-            const files = {
-                'cv': '履歴書_池田悠耶.pdf',
-                'portfolio': '研究ポートフォリオ_池田悠耶.pdf',
-                'publications': '論文リスト_池田悠耶.pdf'
-            };
-            
-            // 実際のファイルがある場合は、以下のようなコードを使用
-            // const link = document.createElement('a');
-            // link.href = 'path/to/' + files[type];
-            // link.download = files[type];
-            // link.click();
-            
-            // デモ用のアラート
-            alert(`${files[type]} をダウンロード中...`);
-        }
-
-        // 浮遊パーティクル生成（改良版）
-        function createParticles() {
-            const particleContainer = document.getElementById('particles');
-            
-            for (let i = 0; i < 20; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.width = Math.random() * 8 + 3 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                
-                particleContainer.appendChild(particle);
-            }
-        }
-
-        // インタラクション強化
-        function enhanceInteractions() {
-            const container = document.querySelector('.container');
-            const profileImage = document.querySelector('.profile-image');
-            
-            // マウス追従効果
-            document.addEventListener('mousemove', (e) => {
-                const x = (e.clientX / window.innerWidth) * 100;
-                const y = (e.clientY / window.innerHeight) * 100;
-                
-                container.style.transform = `perspective(1000px) rotateY(${(x - 50) * 0.1}deg) rotateX(${(y - 50) * -0.1}deg)`;
-            });
-            
-            // プロフィール画像のランダム回転
-            setInterval(() => {
-                if (!profileImage.matches(':hover')) {
-                    profileImage.style.transform = `rotate(${Math.random() * 10 - 5}deg)`;
-                }
-            }, 3000);
-        }
-
-        // ページロード時の初期化
-        window.addEventListener('load', () => {
-            createParticles();
-            enhanceInteractions();
-            
-            // 画像エラーハンドリングの設定
-            const profileImg = document.getElementById('profileImg');
-            profileImg.onerror = handleImageError;
-            
-            // 滑らかなアニメーション開始
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
-        });
-
-        // リサイズ時の最適化
-        window.addEventListener('resize', () => {
-            const container = document.querySelector('.container');
-            container.style.transform = 'none';
         });
     </script>
 </body>
