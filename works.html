@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Works | 池田 悠耶</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'korean-blue': '#001B3A',
+                        'korean-light-blue': '#0066CC',
+                        'korean-silver': '#E8F4FD',
+                        'korean-accent': '#FF6B35'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <style>
+        :root {
+            --korean-blue: #001B3A;
+            --korean-light-blue: #0066CC;
+            --korean-silver: #E8F4FD;
+            --korean-accent: #FF6B35;
+            --gradient-primary: linear-gradient(135deg, #001B3A 0%, #0066CC 100%);
+            --gradient-secondary: linear-gradient(135deg, #E8F4FD 0%, #ffffff 100%);
+            --shadow-primary: 0 20px 40px rgba(0, 27, 58, 0.15);
+            --shadow-hover: 0 30px 60px rgba(0, 27, 58, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            color: var(--korean-blue);
+            font-weight: 400;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--korean-silver);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--korean-light-blue);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--korean-blue);
+        }
+
+        /* Header Styles */
+        .header-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 27, 58, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .header-scrolled {
+            background: rgba(0, 27, 58, 0.95);
+            color: white;
+        }
+
+        /* Navigation */
+        .nav-item {
+            position: relative;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 8px 16px;
+            border-radius: 25px;
+            text-decoration: none;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-primary);
+            border-radius: 25px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .nav-item:hover::before,
+        .nav-item.active::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, rgba(0, 27, 58, 0.98) 0%, rgba(0, 102, 204, 0.98) 100%);
+            backdrop-filter: blur(20px);
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-item {
+            color: white;
+            transition: all 0.3s ease;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            display: block;
+        }
+
+        .mobile-nav-item:hover {
+            color: var(--korean-accent);
+            transform: translateX(10px);
+        }
+
+        /* Hero Gradient Text */
+        .hero-gradient {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Work Card Styles */
+        .work-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 27, 58, 0.1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 27, 58, 0.08);
+            group: true;
+        }
+
+        .work-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+        }
+
+        .work-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-hover);
+            border-color: transparent;
+        }
+
+        .work-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .work-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .work-card:hover .work-image {
+            transform: scale(1.05);
+        }
+
+        .work-content {
+            padding: 32px;
+        }
+
+        /* Filter Buttons */
+        .filter-btn {
+            padding: 12px 24px;
+            border-radius: 50px;
+            border: 2px solid rgba(0, 27, 58, 0.2);
+            background: transparent;
+            color: var(--korean-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        /* Tech Stack Tags */
+        .tech-tag {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--korean-silver);
+            color: var(--korean-blue);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: var(--korean-light-blue);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        /* Project Status Badge */
+        .status-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            z-index: 20;
+        }
+
+        .status-completed {
+            background: rgba(34, 197, 94, 0.9);
+            color: white;
+        }
+
+        .status-ongoing {
+            background: rgba(255, 107, 53, 0.9);
+            color: white;
+        }
+
+        .status-research {
+            background: rgba(139, 92, 246, 0.9);
+            color: white;
+        }
+
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            border-radius: 24px;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes modalSlideIn {
+            from { 
+                opacity: 0;
+                transform: translateY(40px) scale(0.9); 
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0) scale(1); 
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .work-image {
+                height: 220px;
+            }
+            
+            .work-content {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 header-glass">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="text-2xl font-black tracking-tight">
+                    <a href="index.html" class="hero-gradient">Y.IKEDA</a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center space-x-2">
+                    <a href="index.html" class="nav-item">Home</a>
+                    <a href="profile.html" class="nav-item">Profile</a>
+                    <a href="works.html" class="nav-item active">Works</a>
+                    <a href="achievements.html" class="nav-item">Achievements</a>
+                    <a href="skills.html" class="nav-item">Skills</a>
+                    <a href="news.html" class="nav-item">News</a>
+                    <a href="contact.html" class="nav-item">Contact</a>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="lg:hidden p-2 relative z-50">
+                    <svg class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-y-0 right-0 w-full sm:w-80 z-40 lg:hidden">
+        <div class="p-8 pt-24">
+            <nav class="space-y-2">
+                <a href="index.html" class="mobile-nav-item text-xl font-semibold">Home</a>
+                <a href="profile.html" class="mobile-nav-item text-xl font-semibold">Profile</a>
+                <a href="works.html" class="mobile-nav-item text-xl font-semibold">Works</a>
+                <a href="achievements.html" class="mobile-nav-item text-xl font-semibold">Achievements</a>
+                <a href="skills.html" class="mobile-nav-item text-xl font-semibold">Skills</a>
+                <a href="news.html" class="mobile-nav-item text-xl font-semibold">News</a>
+                <a href="contact.html" class="mobile-nav-item text-xl font-semibold">Contact</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-korean-silver/30 to-white">
+            <div class="container mx-auto max-w-7xl">
+                <div class="text-center mb-16">
+                    <div class="reveal mb-6">
+                        <span class="inline-block px-4 py-2 bg-korean-light-blue/10 text-korean-light-blue rounded-full text-sm font-bold uppercase tracking-wide mb-4">
+                            Portfolio
+                        </span>
+                        <h1 class="text-5xl sm:text-6xl font-black mb-6">
+                            <span class="hero-gradient">My Works</span>
+                        </h1>
+                    </div>
+                    <p class="text-xl text-korean-blue/70 max-w-3xl mx-auto reveal" style="animation-delay: 0.2s;">
+                        革新的なテクノロジーを活用したプロジェクトとソリューション
+                    </p>
+                </div>
+
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap justify-center gap-4 mb-16 reveal" style="animation-delay: 0.3s;">
+                    <button class="filter-btn active" data-filter="all">All Projects</button>
+                    <button class="filter-btn" data-filter="ai">AI/ML</button>
+                    <button class="filter-btn" data-filter="web">Web App</button>
+                    <button class="filter-btn" data-filter="research">Research</button>
+                    <button class="filter-btn" data-filter="cloud">Cloud</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Works Grid -->
+        <section class="py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="works-grid">
+                    
+                    <!-- Project 1: Large Language Model -->
+                    <div class="work-card reveal" data-category="ai research" data-project="1" style="animation-delay: 0.1s;">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop" 
+                                 alt="LLM Project" class="work-image">
+                            <div class="status-badge status-completed">Completed</div>
+                        </div>
+                        <div class="work-content">
+                            <h3 class="text-2xl font-bold mb-4">大規模言語モデルの最適化</h3>
+                            <p class="text-korean-blue/70 mb-6 leading-relaxed">
+                                GPTベースのモデルを日本語に特化して最適化。推論速度を50%向上させながら精度を維持。
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-tag">PyTorch</span>
+                                <span class="tech-tag">Transformers</span>
+                                <span class="tech-tag">CUDA</span>
+                                <span class="tech-tag">Japanese NLP</span>
+                            </div>
+                            <div class="flex items-center text-sm text-korean-blue/60">
+                                <i data-feather="calendar" class="w-4 h-4 mr-2"></i>
+                                <span>2024.01 - 2024.06</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Real-time Analytics -->
+                    <div class="work-card reveal" data-category="cloud web" data-project="2" style="animation-delay: 0.2s;">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" 
+                                 alt="Analytics Platform" class="work-image">
+                            <div class="status-badge status-ongoing">Ongoing</div>
+                        </div>
+                        <div class="work-content">
+                            <h3 class="text-2xl font-bold mb-4">リアルタイムデータ分析基盤</h3>
+                            <p class="text-korean-blue/70 mb-6 leading-relaxed">
+                                毎秒100万件のデータを処理する分析基盤を構築。ビジネスインサイトの即時提供を実現。
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-tag">Apache Kafka</span>
+                                <span class="tech-tag">Spark</span>
+                                <span class="tech-tag">AWS</span>
+                                <span class="tech-tag">React</span>
+                            </div>
+                            <div class="flex items-center text-sm text-korean-blue/60">
+                                <i data-feather="calendar" class="w-4 h-4 mr-2"></i>
+                                <span>2023.09 - Present</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: Computer Vision -->
+                    <div class="work-card reveal" data-category="ai" data-project="3" style="animation-delay: 0.3s;">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop" 
+                                 alt="Computer Vision" class="work-image">
+                            <div class="status-badge status-completed">Completed</div>
+                        </div>
+                        <div class="work-content">
+                            <h3 class="text-2xl font-bold mb-4">画像認識システム開発</h3>
+                            <p class="text-korean-blue/70 mb-6 leading-relaxed">
+                                製造業向けの品質検査AIシステム。99.8%の精度で不良品を検出。
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-tag">TensorFlow</span>
+                                <span class="tech-tag">OpenCV</span>
+                                <span class="tech-tag">Docker</span>
+                                <span class="tech-tag">Edge AI</span>
+                            </div>
+                            <div class="flex items-center text-sm text-korean-blue/60">
+                                <i data-feather="calendar" class="w-4 h-4 mr-2"></i>
+                                <span>2023.03 - 2023.11</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Microservices -->
+                    <div class="work-card reveal" data-category="cloud web" data-project="4" style="animation-delay: 0.4s;">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" 
+                                 alt="Microservices" class="work-image">
+                            <div class="status-badge status-completed">Completed</div>
+                        </div>
+                        <div class="work-content">
+                            <h3 class="text-2xl font-bold mb-4">マイクロサービス基盤</h3>
+                            <p class="text-korean-blue/70 mb-6 leading-relaxed">
+                                スケーラブルなAPIプラットフォームを構築。月間10億リクエストを処理。
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-tag">Kubernetes</span>
+                                <span class="tech-tag">Go</span>
+                                <span class="tech-tag">gRPC</span>
+                                <span class="tech-tag">PostgreSQL</span>
+                            </div>
+                            <div class="flex items-center text-sm text-korean-blue/60">
+                                <i data-feather="calendar" class="w-4 h-4 mr-2"></i>
+                                <span>2022.06 - 2023.02</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 5: Blockchain Research -->
+                    <div class="work-card reveal" data-category="research" data-project="5" style="animation-delay: 0.5s;">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop" 
+                                 alt="Blockchain Research" class="work-image">
+                            <div class="status-badge status-research">Research</div>
+                        </div>
+                        <div class="work-content">
+                            <h3 class="text-2xl font-bold mb-4">ブロックチェーン最適化研究</h3>
+                            <p class="text-korean-blue/70 mb-6 leading-relaxed">
+                                コンセンサスアルゴリズムの効率化に関する研究。論文を国際会議に投稿。
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-tag">Solidity</span>
+                                <span class="tech-tag">Web3.js</span>
+                                <span class="tech-tag">Cryptography</span>
+                                <span class="tech-tag">Research</span>
+                            </div>
+                            <div class="flex items-center text-sm text-korean-blue/60">
+                                <i data-feather="calendar" class="w-4 h-4 mr-2"></i>
+                                <span>2022.01 - 2022.12</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 6: E-commerce Platform -->
+                    <div class="work-card reveal" data-category="web" data-project="6" style="animation-delay: 0.6s;">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop" 
+                                 alt="E-commerce Platform" class="work-image">
+                            <div class="status-badge status-completed">Completed</div>
+                        </div>
+                        <div class="work-content">
+                            <h3 class="text-2xl font-bold mb-4">次世代ECプラットフォーム</h3>
+                            <p class="text-korean-blue/70 mb-6 leading-relaxed">
+                                AIを活用した推薦システムとリアルタイム在庫管理を実装したECサイト。
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-tag">Next.js</span>
+                                <span class="tech-tag">TypeScript</span>
+                                <span class="tech-tag">GraphQL</span>
+                                <span class="tech-tag">Redis</span>
+                            </div>
+                            <div class="flex items-center text-sm text-korean-blue/60">
+                                <i data-feather="calendar" class="w-4 h-4 mr-2"></i>
+                                <span>2021.08 - 2022.03</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-32 bg-gradient-to-br from-korean-blue to-korean-light-blue relative overflow-hidden">
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+            
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center relative z-10">
+                <div class="reveal">
+                    <h2 class="text-4xl sm:text-5xl font-black text-white mb-8">
+                        Ready to Innovate?
+                    </h2>
+                    <p class="text-xl text-white/80 mb-12 max-w-2xl mx-auto">
+                        一緒に次世代のテクノロジーソリューションを創造しませんか？
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                        <a href="contact.html" class="inline-flex items-center bg-white text-korean-blue px-8 py-4 rounded-full font-bold hover:shadow-2xl transform hover:-translate-y-1 transition-all">
+                            Start a Project
+                            <i data-feather="arrow-right" class="w-5 h-5 ml-2"></i>
+                        </a>
+                        <a href="achievements.html" class="inline-flex items-center bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-korean-blue transition-all">
+                            View Achievements
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Project Detail Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">
+                <i data-feather="x" class="w-6 h-6"></i>
+            </button>
+            <div id="modal-body">
+                <!-- Content will be dynamically loaded -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-korean-blue text-white py-16 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-korean-blue via-korean-light-blue to-korean-blue opacity-50"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="flex justify-center space-x-8 mb-8">
+                <a href="#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110">
+                    <i data-feather="github" class="w-6 h-6"></i>
+                </a>
+                <a href="#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110">
+                    <i data-feather="linkedin" class="w-6 h-6"></i>
+                </a>
+                <a href="#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110">
+                    <i data-feather="twitter" class="w-6 h-6"></i>
+                </a>
+            </div>
+            <p class="text-white/60 font-medium">
+                &copy; 2025 Yuya Ikeda. All rights reserved. | Innovation in Motion
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Feather Icons
+        feather.replace();
+
+        // Project data for modal
+        const projectData = {
+            1: {
+                title: "大規模言語モデルの最適化",
+                subtitle: "Japanese-optimized Large Language Model",
+                description: "GPTベースのモデルを日本語に特化して最適化し、推論速度を50%向上させながら精度を維持したプロジェクト。",
+                longDescription: `
+                    <p class="mb-4">このプロジェクトでは、既存の大規模言語モデルを日本語のタスクに特化して最適化することを目標としました。</p>
+                    <p class="mb-4">主な成果：</p>
+                    <ul class="list-disc pl-6 mb-4">
+                        <li>推論速度を50%向上</li>
+                        <li>日本語理解精度を15%改善</li>
+                        <li>メモリ使用量を30%削減</li>
+                        <li>多言語対応の実装</li>
+                    </ul>
+                    <p>このシステムは現在、複数の企業で実用運用されており、日本語処理において高い評価を得ています。</p>
+                `,
+                image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=500&fit=crop",
+                tech: ["PyTorch", "Transformers", "CUDA", "Japanese NLP", "Docker", "FastAPI"],
+                github: "https://github.com/example/llm-optimization",
+                demo: "https://demo.example.com"
+            },
+            2: {
+                title: "リアルタイムデータ分析基盤",
+                subtitle: "Real-time Analytics Platform",
+                description: "毎秒100万件のデータを処理する分析基盤を構築し、ビジネスインサイトの即時提供を実現。",
+                longDescription: `
+                    <p class="mb-4">企業のリアルタイムデータを効率的に処理し、ビジネス洞察を即座に提供するプラットフォームの開発。</p>
+                    <p class="mb-4">技術的特徴：</p>
+                    <ul class="list-disc pl-6 mb-4">
+                        <li>Apache Kafkaによる高スループットデータストリーミング</li>
+                        <li>Apache Sparkでのリアルタイム処理</li>
+                        <li>AWSクラウドでのスケーラブルな構成</li>
+                        <li>Reactベースのリアルタイムダッシュボード</li>
+                    </ul>
+                    <p>現在も継続的な機能追加とパフォーマンス最適化を行っています。</p>
+                `,
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop",
+                tech: ["Apache Kafka", "Spark", "AWS", "React", "TypeScript", "Elasticsearch"],
+                github: "https://github.com/example/analytics-platform",
+                demo: "https://analytics.example.com"
+            }
+            // Add more project data as needed
+        };
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.querySelector('.menu-icon');
+        const closeIcon = document.querySelector('.close-icon');
+
+        function toggleMobileMenu() {
+            const isOpen = mobileMenu.classList.contains('active');
+            if (isOpen) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        }
+
+        function openMobileMenu() {
+            mobileMenu.classList.add('active');
+            menuIcon.classList.add('hidden');
+            closeIcon.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        }, { passive: true });
+
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const workCards = document.querySelectorAll('.work-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+                
+                // Filter cards
+                workCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category.includes(filter)) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 50);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('project-modal');
+        const modalClose = document.getElementById('modal-close');
+        const modalBody = document.getElementById('modal-body');
+
+        // Open modal when clicking on project cards
+        workCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const projectId = card.dataset.project;
+                const project = projectData[projectId];
+                
+                if (project) {
+                    modalBody.innerHTML = `
+                        <div class="p-8">
+                            <img src="${project.image}" alt="${project.title}" class="w-full h-64 object-cover rounded-lg mb-6">
+                            <h2 class="text-3xl font-bold mb-2">${project.title}</h2>
+                            <p class="text-korean-light-blue text-lg font-semibold mb-6">${project.subtitle}</p>
+                            <div class="prose max-w-none mb-8">
+                                ${project.longDescription}
+                            </div>
+                            <div class="mb-6">
+                                <h3 class="text-xl font-bold mb-3">Tech Stack</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    ${project.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                ${project.github ? `<a href="${project.github}" target="_blank" class="inline-flex items-center px-6 py-3 bg-korean-light-blue text-white rounded-lg hover:bg-korean-blue transition-colors">
+                                    <i data-feather="github" class="w-4 h-4 mr-2"></i>
+                                    View Code
+                                </a>` : ''}
+                                ${project.demo ? `<a href="${project.demo}" target="_blank" class="inline-flex items-center px-6 py-3 border-2 border-korean-light-blue text-korean-light-blue rounded-lg hover:bg-korean-light-blue hover:text-white transition-colors">
+                                    <i data-feather="external-link" class="w-4 h-4 mr-2"></i>
+                                    Live Demo
+                                </a>` : ''}
+                            </div>
+                        </div>
+                    `;
+                    
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Re-initialize feather icons for modal content
+                    feather.replace();
+                }
+            });
+        });
+
+        // Close modal
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const animationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Observe animation elements
+            const elementsToAnimate = document.querySelectorAll('.reveal, .reveal-scale');
+            elementsToAnimate.forEach(el => {
+                animationObserver.observe(el);
+            });
+        });
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (mobileMenu.classList.contains('active')) {
+                    closeMobileMenu();
+                }
+                if (modal.classList.contains('active')) {
+                    closeModal();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
