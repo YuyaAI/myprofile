@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills | 池田 悠耶</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'korean-blue': '#001B3A',
+                        'korean-light-blue': '#0066CC',
+                        'korean-silver': '#E8F4FD',
+                        'korean-accent': '#FF6B35'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <style>
+        :root {
+            --korean-blue: #001B3A;
+            --korean-light-blue: #0066CC;
+            --korean-silver: #E8F4FD;
+            --korean-accent: #FF6B35;
+            --gradient-primary: linear-gradient(135deg, #001B3A 0%, #0066CC 100%);
+            --gradient-secondary: linear-gradient(135deg, #E8F4FD 0%, #ffffff 100%);
+            --shadow-primary: 0 20px 40px rgba(0, 27, 58, 0.15);
+            --shadow-hover: 0 30px 60px rgba(0, 27, 58, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            color: var(--korean-blue);
+            font-weight: 400;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--korean-silver);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--korean-light-blue);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--korean-blue);
+        }
+
+        /* Header Styles */
+        .header-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 27, 58, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .header-scrolled {
+            background: rgba(0, 27, 58, 0.95);
+            color: white;
+        }
+
+        /* Navigation */
+        .nav-item {
+            position: relative;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 8px 16px;
+            border-radius: 25px;
+            text-decoration: none;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-primary);
+            border-radius: 25px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .nav-item:hover::before,
+        .nav-item.active::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, rgba(0, 27, 58, 0.98) 0%, rgba(0, 102, 204, 0.98) 100%);
+            backdrop-filter: blur(20px);
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-item {
+            color: white;
+            transition: all 0.3s ease;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            display: block;
+        }
+
+        .mobile-nav-item:hover {
+            color: var(--korean-accent);
+            transform: translateX(10px);
+        }
+
+        /* Hero Gradient Text */
+        .hero-gradient {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Skill Cards */
+        .skill-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 24px;
+            padding: 32px;
+            border: 1px solid rgba(0, 27, 58, 0.1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 27, 58, 0.08);
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .skill-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: var(--korean-silver);
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 16px;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 6px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 20%;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(500%); }
+        }
+
+        .progress-bar.active {
+            transform: scaleX(1);
+        }
+
+        /* Skill Level Badge */
+        .skill-level {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .level-expert {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: white;
+        }
+
+        .level-advanced {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .level-intermediate {
+            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+            color: white;
+        }
+
+        /* Technology Icons */
+        .tech-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .tech-python { background: linear-gradient(135deg, #3776ab 0%, #ffd43b 100%); }
+        .tech-js { background: linear-gradient(135deg, #f7df1e 0%, #323330 100%); }
+        .tech-react { background: linear-gradient(135deg, #61dafb 0%, #21232a 100%); }
+        .tech-aws { background: linear-gradient(135deg, #ff9900 0%, #232f3e 100%); }
+        .tech-docker { background: linear-gradient(135deg, #2496ed 0%, #0db7ed 100%); }
+        .tech-kubernetes { background: linear-gradient(135deg, #326ce5 0%, #ffffff 100%); }
+        .tech-tensorflow { background: linear-gradient(135deg, #ff6f00 0%, #ffffff 100%); }
+        .tech-pytorch { background: linear-gradient(135deg, #ee4c2c 0%, #ffffff 100%); }
+
+        .skill-card:hover .tech-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Radar Chart Container */
+        .radar-chart {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .reveal-slide-left {
+            opacity: 0;
+            transform: translateX(-80px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-slide-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-slide-right {
+            opacity: 0;
+            transform: translateX(80px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-slide-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Expertise Timeline */
+        .expertise-timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--korean-light-blue), var(--korean-accent));
+            transform: translateX(-50%);
+        }
+
+        .timeline-point {
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .timeline-point::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 16px;
+            height: 16px;
+            background: var(--korean-light-blue);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.2);
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .timeline-content {
+            width: 45%;
+            padding: 32px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 27, 58, 0.08);
+            border: 1px solid rgba(0, 27, 58, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 27, 58, 0.15);
+        }
+
+        .timeline-point:nth-child(odd) .timeline-content {
+            margin-left: 0;
+        }
+
+        .timeline-point:nth-child(even) .timeline-content {
+            margin-left: 55%;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 30px;
+            }
+            
+            .timeline-point::before {
+                left: 30px;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 60px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 header-glass">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="text-2xl font-black tracking-tight">
+                    <a href="index.html" class="hero-gradient">Y.IKEDA</a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center space-x-2">
+                    <a href="index.html" class="nav-item">Home</a>
+                    <a href="profile.html" class="nav-item">Profile</a>
+                    <a href="works.html" class="nav-item">Works</a>
+                    <a href="achievements.html" class="nav-item">Achievements</a>
+                    <a href="skills.html" class="nav-item active">Skills</a>
+                    <a href="news.html" class="nav-item">News</a>
+                    <a href="contact.html" class="nav-item">Contact</a>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="lg:hidden p-2 relative z-50">
+                    <svg class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-y-0 right-0 w-full sm:w-80 z-40 lg:hidden">
+        <div class="p-8 pt-24">
+            <nav class="space-y-2">
+                <a href="index.html" class="mobile-nav-item text-xl font-semibold">Home</a>
+                <a href="profile.html" class="mobile-nav-item text-xl font-semibold">Profile</a>
+                <a href="works.html" class="mobile-nav-item text-xl font-semibold">Works</a>
+                <a href="achievements.html" class="mobile-nav-item text-xl font-semibold">Achievements</a>
+                <a href="skills.html" class="mobile-nav-item text-xl font-semibold">Skills</a>
+                <a href="news.html" class="mobile-nav-item text-xl font-semibold">News</a>
+                <a href="contact.html" class="mobile-nav-item text-xl font-semibold">Contact</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-korean-silver/30 to-white">
+            <div class="container mx-auto max-w-7xl">
+                <div class="text-center mb-16">
+                    <div class="reveal mb-6">
+                        <span class="inline-block px-4 py-2 bg-korean-light-blue/10 text-korean-light-blue rounded-full text-sm font-bold uppercase tracking-wide mb-4">
+                            Technical Expertise
+                        </span>
+                        <h1 class="text-5xl sm:text-6xl font-black mb-6">
+                            <span class="hero-gradient">Skills & Technologies</span>
+                        </h1>
+                    </div>
+                    <p class="text-xl text-korean-blue/70 max-w-3xl mx-auto reveal" style="animation-delay: 0.2s;">
+                        最新テクノロジーの習得と実践的な応用で、革新的なソリューションを創造
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Skills -->
+        <section class="py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-black mb-6 reveal">Core Technologies</h2>
+                    <p class="text-xl text-korean-blue/70 max-w-2xl mx-auto reveal" style="animation-delay: 0.2s;">
+                        深い専門知識と豊富な実践経験を持つ技術スタック
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Python -->
+                    <div class="skill-card reveal" style="animation-delay: 0.1s;">
+                        <div class="skill-level level-expert">Expert</div>
+                        <div class="tech-icon tech-python">
+                            <i data-feather="code" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Python</h3>
+                        <p class="text-korean-blue/70 mb-4">
+                            機械学習、データ分析、Webアプリケーション開発における主要言語
+                        </p>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="95"></div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="text-xs bg-korean-silver px-2 py-1 rounded">NumPy</span>
+                            <span class="text-xs bg-korean-silver px-2 py-1 rounded">Pandas</span>
+                            <span class="text-xs bg-korean-silver px-2 py-1 rounded">FastAPI</span>
+                        </div>
+                    </div>
+
+                    <!-- PyTorch -->
+                    <div class="skill-card reveal" style="animation-delay: 0.2s;">
+                        <div class="skill-level level-expert">Expert</div>
+                        <div class="tech-icon tech-pytorch">
+                            <i data-feather="cpu" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">PyTorch</h3>
+                        <p class="text-korean-blue/70 mb-4">
+                            深層学習モデルの研究開発と本番運用における専門フレームワーク
+                        </p>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="92"></div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="text-xs bg-korean-silver px-2 py-1 rounded">Transformers</span>
+                            <span class="text-xs bg-korean-silver px-2 py-1 rounded">Lightning</span>
+                            <span class="text-xs bg-korean-silver px-2 py-1 rounded">TorchScript</span>
+                        </div>
+                    </div>
+
+                    <!-- AWS -->
+                    <div class="skill-card reveal" style="animation-delay: 0.3s;">
+                        <div class="skill-level level-advanced">Advanced</div>
+                        <div class="tech-icon tech-aws">
+                            <i data-feather="cloud" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">AWS</h3>
+                        <p class="text-korean-blue/70 mb-4">
+                            スケーラブルなクラウドアーキテクチャの設計と運用
+                        </p>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="88"></div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="text-xs bg-korean-silver px-2 py-1 rounded">EC2</span>
+                            <span class="text-xs bg-korean-silver px-2 py-1 rounded">Lambda</span>
+                            <span class="text-xs bg-korean-silver px-2 py-1 rounded">SageMaker</span>
+                        </div>
+                    </div>
+
+                    <!-- Docker -->
+                    <div class="skill-card reveal" style="animation-delay: 0.4s;">
+                        <div class="skill-level level-advanced">Advanced</div>
+                        <div class="tech-icon tech-docker">
+                            <i data-feather="box" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Docker</h3>
+                        <p class="text-korean-blue/70 mb-4">
+                            コンテナ化によるアプリケーションのデプロイメントと管理
+                        </p>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="85"></div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="text-xs bg-korean-silver px-2 py-1 rounded">Multi-stage</span>
+                            <span class="text-xs bg-korean-silver px-2 py-1 rounded">Compose</span>
+                            <span class="text-xs bg-korean-silver px-2 py-1 rounded">Registry</span>
+                        </div>
+                    </div>
+
+                    <!-- Kubernetes -->
+                    <div class="skill-card reveal" style="animation-delay: 0.5s;">
+                        <div class="skill-level level-advanced">Advanced</div>
+                        <div class="tech-icon tech-kubernetes">
+                            <i data-feather="layers" class="w-8 h-8 text-korean-blue"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Kubernetes</h3>
+                        <p class="text-korean-blue/70 mb-4">
+                            大規模なコンテナオーケストレーションと自動スケーリング
+                        </p>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="80"></div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="text-xs bg-korean-silver px-2 py-1 rounded">Helm</span>
+                            <span class="text-xs bg-korean-silver px-2 py-1 rounded">Ingress</span>
+                            <span class="text-xs bg-korean-silver px-2 py-1 rounded">Monitoring</span>
+                        </div>
+                    </div>
+
+                    <!-- JavaScript -->
+                    <div class="skill-card reveal" style="animation-delay: 0.6s;">
+                        <div class="skill-level level-intermediate">Intermediate</div>
+                        <div class="tech-icon tech-js">
+                            <i data-feather="globe" class="w-8 h-8 text-korean-blue"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">JavaScript</h3>
+                        <p class="text-korean-blue/70 mb-4">
+                            フロントエンド開発とNode.jsによるバックエンド構築
+                        </p>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="75"></div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="text-xs bg-korean-silver px-2 py-1 rounded">React</span>
+                            <span class="text-xs bg-korean-silver px-2 py-1 rounded">Node.js</span>
+                            <span class="text-xs bg-korean-silver px-2 py-1 rounded">TypeScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expertise Areas -->
+        <section class="py-32 bg-gradient-to-br from-korean-silver/30 to-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl font-black mb-6 reveal">Areas of Expertise</h2>
+                    <p class="text-xl text-korean-blue/70 max-w-2xl mx-auto reveal" style="animation-delay: 0.2s;">
+                        専門知識と実践経験を活かした得意分野
+                    </p>
+                </div>
+
+                <div class="expertise-timeline">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="timeline-point reveal" style="animation-delay: 0.3s;">
+                        <div class="timeline-content">
+                            <div class="flex items-start mb-4">
+                                <div class="w-16 h-16 bg-korean-light-blue/10 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i data-feather="brain" class="w-8 h-8 text-korean-light-blue"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold mb-2">Machine Learning</h3>
+                                    <p class="text-korean-blue/70">
+                                        深層学習、自然言語処理、コンピュータビジョンにおける研究開発と実装
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <span class="font-semibold text-korean-blue">Experience:</span>
+                                    <p class="text-korean-blue/70">7+ years</p>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-korean-blue">Projects:</span>
+                                    <p class="text-korean-blue/70">15+ completed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-point reveal" style="animation-delay: 0.4s;">
+                        <div class="timeline-content">
+                            <div class="flex items-start mb-4">
+                                <div class="w-16 h-16 bg-korean-accent/10 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i data-feather="server" class="w-8 h-8 text-korean-accent"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold mb-2">Cloud Architecture</h3>
+                                    <p class="text-korean-blue/70">
+                                        AWS、GCPを活用したスケーラブルなクラウドインフラの設計と運用
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <span class="font-semibold text-korean-blue">Experience:</span>
+                                    <p class="text-korean-blue/70">5+ years</p>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-korean-blue">Certifications:</span>
+                                    <p class="text-korean-blue/70">AWS SA Pro</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-point reveal" style="animation-delay: 0.5s;">
+                        <div class="timeline-content">
+                            <div class="flex items-start mb-4">
+                                <div class="w-16 h-16 bg-purple-500/10 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i data-feather="bar-chart-3" class="w-8 h-8 text-purple-500"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold mb-2">Data Engineering</h3>
+                                    <p class="text-korean-blue/70">
+                                        大規模データパイプラインの構築とリアルタイム分析システムの開発
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <span class="font-semibold text-korean-blue">Experience:</span>
+                                    <p class="text-korean-blue/70">4+ years</p>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-korean-blue">Scale:</span>
+                                    <p class="text-korean-blue/70">1M+ records/sec</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-point reveal" style="animation-delay: 0.6s;">
+                        <div class="timeline-content">
+                            <div class="flex items-start mb-4">
+                                <div class="w-16 h-16 bg-green-500/10 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i data-feather="users" class="w-8 h-8 text-green-500"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold mb-2">Team Leadership</h3>
+                                    <p class="text-korean-blue/70">
+                                        技術チームのマネジメントとプロジェクトの戦略的リーダーシップ
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <span class="font-semibold text-korean-blue">Experience:</span>
+                                    <p class="text-korean-blue/70">3+ years</p>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-korean-blue">Team Size:</span>
+                                    <p class="text-korean-blue/70">Up to 12 members</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Soft Skills -->
+        <section class="py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-black mb-6 reveal">Professional Skills</h2>
+                    <p class="text-xl text-korean-blue/70 max-w-2xl mx-auto reveal" style="animation-delay: 0.2s;">
+                        技術力を支えるコミュニケーションとリーダーシップ能力
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="text-center reveal" style="animation-delay: 0.3s;">
+                        <div class="w-20 h-20 bg-korean-light-blue/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i data-feather="message-circle" class="w-10 h-10 text-korean-light-blue"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Communication</h3>
+                        <p class="text-korean-blue/70 text-sm">
+                            技術的内容を分かりやすく説明し、ステークホルダーとの効果的なコミュニケーション
+                        </p>
+                    </div>
+
+                    <div class="text-center reveal" style="animation-delay: 0.4s;">
+                        <div class="w-20 h-20 bg-korean-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i data-feather="target" class="w-10 h-10 text-korean-accent"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Problem Solving</h3>
+                        <p class="text-korean-blue/70 text-sm">
+                            複雑な技術課題を体系的に分析し、革新的なソリューションを提案
+                        </p>
+                    </div>
+
+                    <div class="text-center reveal" style="animation-delay: 0.5s;">
+                        <div class="w-20 h-20 bg-purple-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i data-feather="trending-up" class="w-10 h-10 text-purple-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Continuous Learning</h3>
+                        <p class="text-korean-blue/70 text-sm">
+                            新しい技術トレンドを積極的に学習し、実務に応用する適応力
+                        </p>
+                    </div>
+
+                    <div class="text-center reveal" style="animation-delay: 0.6s;">
+                        <div class="w-20 h-20 bg-green-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i data-feather="globe" class="w-10 h-10 text-green-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Global Mindset</h3>
+                        <p class="text-korean-blue/70 text-sm">
+                            英語での論文執筆、国際会議での発表、多国籍チームでの協働経験
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools & Technologies -->
+        <section class="py-32 bg-gradient-to-br from-korean-blue to-korean-light-blue relative overflow-hidden">
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+            
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-black text-white mb-6 reveal">Tools & Platforms</h2>
+                    <p class="text-xl text-white/80 max-w-2xl mx-auto reveal" style="animation-delay: 0.2s;">
+                        日常的に使用している開発ツールとプラットフォーム
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                    <div class="text-center reveal" style="animation-delay: 0.3s;">
+                        <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4 hover:bg-white/20 transition-all">
+                            <i data-feather="git-branch" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <p class="text-white/80 text-sm font-semibold">Git</p>
+                    </div>
+
+                    <div class="text-center reveal" style="animation-delay: 0.4s;">
+                        <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4 hover:bg-white/20 transition-all">
+                            <i data-feather="terminal" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <p class="text-white/80 text-sm font-semibold">Linux</p>
+                    </div>
+
+                    <div class="text-center reveal" style="animation-delay: 0.5s;">
+                        <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4 hover:bg-white/20 transition-all">
+                            <i data-feather="database" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <p class="text-white/80 text-sm font-semibold">PostgreSQL</p>
+                    </div>
+
+                    <div class="text-center reveal" style="animation-delay: 0.6s;">
+                        <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4 hover:bg-white/20 transition-all">
+                            <i data-feather="activity" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <p class="text-white/80 text-sm font-semibold">Redis</p>
+                    </div>
+
+                    <div class="text-center reveal" style="animation-delay: 0.7s;">
+                        <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4 hover:bg-white/20 transition-all">
+                            <i data-feather="monitor" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <p class="text-white/80 text-sm font-semibold">Jupyter</p>
+                    </div>
+
+                    <div class="text-center reveal" style="animation-delay: 0.8s;">
+                        <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4 hover:bg-white/20 transition-all">
+                            <i data-feather="eye" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <p class="text-white/80 text-sm font-semibold">Grafana</p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-16 reveal" style="animation-delay: 0.9s;">
+                    <h3 class="text-2xl font-bold text-white mb-8">Ready to Build Together?</h3>
+                    <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                        <a href="contact.html" class="inline-flex items-center bg-white text-korean-blue px-8 py-4 rounded-full font-bold hover:shadow-2xl transform hover:-translate-y-1 transition-all">
+                            Start Collaboration
+                            <i data-feather="arrow-right" class="w-5 h-5 ml-2"></i>
+                        </a>
+                        <a href="works.html" class="inline-flex items-center bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-korean-blue transition-all">
+                            See My Projects
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-korean-blue text-white py-16 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-korean-blue via-korean-light-blue to-korean-blue opacity-50"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="flex justify-center space-x-8 mb-8">
+                <a href="#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110">
+                    <i data-feather="github" class="w-6 h-6"></i>
+                </a>
+                <a href="#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110">
+                    <i data-feather="linkedin" class="w-6 h-6"></i>
+                </a>
+                <a href="#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110">
+                    <i data-feather="twitter" class="w-6 h-6"></i>
+                </a>
+            </div>
+            <p class="text-white/60 font-medium">
+                &copy; 2025 Yuya Ikeda. All rights reserved. | Innovation in Motion
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Feather Icons
+        feather.replace();
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.querySelector('.menu-icon');
+        const closeIcon = document.querySelector('.close-icon');
+
+        function toggleMobileMenu() {
+            const isOpen = mobileMenu.classList.contains('active');
+            if (isOpen) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        }
+
+        function openMobileMenu() {
+            mobileMenu.classList.add('active');
+            menuIcon.classList.add('hidden');
+            closeIcon.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        }, { passive: true });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const animationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Trigger progress bars
+                    const progressBars = entry.target.querySelectorAll('.progress-bar');
+                    progressBars.forEach(bar => {
+                        setTimeout(() => {
+                            const width = bar.dataset.width + '%';
+                            bar.style.width = width;
+                            bar.classList.add('active');
+                        }, 300);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Observe animation elements
+            const elementsToAnimate = document.querySelectorAll('.reveal, .reveal-scale, .reveal-slide-left, .reveal-slide-right');
+            elementsToAnimate.forEach(el => {
+                animationObserver.observe(el);
+            });
+        });
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+    </script>
+</body>
+</html>

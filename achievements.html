@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievements | 池田 悠耶</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'korean-blue': '#001B3A',
+                        'korean-light-blue': '#0066CC',
+                        'korean-silver': '#E8F4FD',
+                        'korean-accent': '#FF6B35'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <style>
+        :root {
+            --korean-blue: #001B3A;
+            --korean-light-blue: #0066CC;
+            --korean-silver: #E8F4FD;
+            --korean-accent: #FF6B35;
+            --gradient-primary: linear-gradient(135deg, #001B3A 0%, #0066CC 100%);
+            --gradient-secondary: linear-gradient(135deg, #E8F4FD 0%, #ffffff 100%);
+            --shadow-primary: 0 20px 40px rgba(0, 27, 58, 0.15);
+            --shadow-hover: 0 30px 60px rgba(0, 27, 58, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            color: var(--korean-blue);
+            font-weight: 400;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--korean-silver);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--korean-light-blue);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--korean-blue);
+        }
+
+        /* Header Styles */
+        .header-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 27, 58, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .header-scrolled {
+            background: rgba(0, 27, 58, 0.95);
+            color: white;
+        }
+
+        /* Navigation */
+        .nav-item {
+            position: relative;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 8px 16px;
+            border-radius: 25px;
+            text-decoration: none;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-primary);
+            border-radius: 25px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .nav-item:hover::before,
+        .nav-item.active::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, rgba(0, 27, 58, 0.98) 0%, rgba(0, 102, 204, 0.98) 100%);
+            backdrop-filter: blur(20px);
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-item {
+            color: white;
+            transition: all 0.3s ease;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            display: block;
+        }
+
+        .mobile-nav-item:hover {
+            color: var(--korean-accent);
+            transform: translateX(10px);
+        }
+
+        /* Hero Gradient Text */
+        .hero-gradient {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Achievement Cards */
+        .achievement-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid rgba(0, 27, 58, 0.1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 27, 58, 0.08);
+        }
+
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .achievement-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* Award Icon */
+        .award-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .award-gold {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: white;
+        }
+
+        .award-silver {
+            background: linear-gradient(135deg, #C0C0C0 0%, #808080 100%);
+            color: white;
+        }
+
+        .award-bronze {
+            background: linear-gradient(135deg, #CD7F32 0%, #8B4513 100%);
+            color: white;
+        }
+
+        .award-blue {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .award-accent {
+            background: linear-gradient(135deg, #FF6B35 0%, #FF4500 100%);
+            color: white;
+        }
+
+        .achievement-card:hover .award-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Publication Card */
+        .publication-card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid rgba(0, 27, 58, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 25px rgba(0, 27, 58, 0.08);
+            margin-bottom: 24px;
+        }
+
+        .publication-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0, 27, 58, 0.15);
+        }
+
+        .publication-venue {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--korean-light-blue);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        .publication-venue.top-tier {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        }
+
+        .publication-venue.conference {
+            background: var(--korean-accent);
+        }
+
+        .publication-venue.journal {
+            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+        }
+
+        /* Stats Counter */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 32px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 27, 58, 0.08);
+            border: 1px solid rgba(0, 27, 58, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 27, 58, 0.15);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--korean-light-blue);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--korean-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Timeline */
+        .timeline-container {
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--korean-light-blue), var(--korean-accent));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 48px;
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 10px 30px rgba(0, 27, 58, 0.08);
+            border: 1px solid rgba(0, 27, 58, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -55px;
+            top: 40px;
+            width: 16px;
+            height: 16px;
+            background: var(--korean-light-blue);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.2);
+            z-index: 10;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .timeline-item:hover::before {
+            background: var(--korean-accent);
+            transform: scale(1.2);
+        }
+
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .reveal-slide-left {
+            opacity: 0;
+            transform: translateX(-80px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-slide-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-slide-right {
+            opacity: 0;
+            transform: translateX(80px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-slide-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Tabs */
+        .tab-button {
+            padding: 16px 32px;
+            border-radius: 50px;
+            border: 2px solid rgba(0, 27, 58, 0.2);
+            background: transparent;
+            color: var(--korean-blue);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .tab-button:hover,
+        .tab-button.active {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .timeline-container {
+                padding-left: 0;
+            }
+            
+            .timeline-container::before {
+                display: none;
+            }
+            
+            .timeline-item::before {
+                display: none;
+            }
+            
+            .achievement-card {
+                padding: 24px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 header-glass">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="text-2xl font-black tracking-tight">
+                    <a href="index.html" class="hero-gradient">Y.IKEDA</a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center space-x-2">
+                    <a href="index.html" class="nav-item">Home</a>
+                    <a href="profile.html" class="nav-item">Profile</a>
+                    <a href="works.html" class="nav-item">Works</a>
+                    <a href="achievements.html" class="nav-item active">Achievements</a>
+                    <a href="skills.html" class="nav-item">Skills</a>
+                    <a href="news.html" class="nav-item">News</a>
+                    <a href="contact.html" class="nav-item">Contact</a>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="lg:hidden p-2 relative z-50">
+                    <svg class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-y-0 right-0 w-full sm:w-80 z-40 lg:hidden">
+        <div class="p-8 pt-24">
+            <nav class="space-y-2">
+                <a href="index.html" class="mobile-nav-item text-xl font-semibold">Home</a>
+                <a href="profile.html" class="mobile-nav-item text-xl font-semibold">Profile</a>
+                <a href="works.html" class="mobile-nav-item text-xl font-semibold">Works</a>
+                <a href="achievements.html" class="mobile-nav-item text-xl font-semibold">Achievements</a>
+                <a href="skills.html" class="mobile-nav-item text-xl font-semibold">Skills</a>
+                <a href="news.html" class="mobile-nav-item text-xl font-semibold">News</a>
+                <a href="contact.html" class="mobile-nav-item text-xl font-semibold">Contact</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-korean-silver/30 to-white">
+            <div class="container mx-auto max-w-7xl">
+                <div class="text-center mb-16">
+                    <div class="reveal mb-6">
+                        <span class="inline-block px-4 py-2 bg-korean-light-blue/10 text-korean-light-blue rounded-full text-sm font-bold uppercase tracking-wide mb-4">
+                            Recognition
+                        </span>
+                        <h1 class="text-5xl sm:text-6xl font-black mb-6">
+                            <span class="hero-gradient">Achievements</span>
+                        </h1>
+                    </div>
+                    <p class="text-xl text-korean-blue/70 max-w-3xl mx-auto reveal" style="animation-delay: 0.2s;">
+                        研究業績、受賞歴、そして技術コミュニティへの貢献
+                    </p>
+                </div>
+
+                <!-- Stats Overview -->
+                <div class="stats-grid reveal" style="animation-delay: 0.3s;">
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="25">0</div>
+                        <div class="stat-label">Publications</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="8">0</div>
+                        <div class="stat-label">Awards</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="1200">0</div>
+                        <div class="stat-label">Citations</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="15">0</div>
+                        <div class="stat-label">Conference Talks</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Tabs -->
+        <section class="py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+                <!-- Tab Navigation -->
+                <div class="flex flex-wrap justify-center gap-4 mb-16 reveal">
+                    <button class="tab-button active" data-tab="awards">Awards & Honors</button>
+                    <button class="tab-button" data-tab="publications">Publications</button>
+                    <button class="tab-button" data-tab="presentations">Presentations</button>
+                    <button class="tab-button" data-tab="certifications">Certifications</button>
+                </div>
+
+                <!-- Awards Tab -->
+                <div id="awards" class="tab-content active">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="achievement-card reveal" style="animation-delay: 0.1s;">
+                            <div class="award-icon award-gold">
+                                <i data-feather="award" class="w-10 h-10"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">Best Paper Award</h3>
+                            <p class="text-korean-light-blue font-semibold mb-2">ICML 2024</p>
+                            <p class="text-korean-blue/70 leading-relaxed">
+                                "Efficient Attention Mechanisms for Large Language Models in Low-Resource Settings"
+                            </p>
+                            <div class="mt-4 text-sm text-korean-blue/60">
+                                機械学習分野最高峰の国際会議での最優秀論文賞
+                            </div>
+                        </div>
+
+                        <div class="achievement-card reveal" style="animation-delay: 0.2s;">
+                            <div class="award-icon award-blue">
+                                <i data-feather="star" class="w-10 h-10"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">Young Researcher Award</h3>
+                            <p class="text-korean-light-blue font-semibold mb-2">AI学会 2023</p>
+                            <p class="text-korean-blue/70 leading-relaxed">
+                                人工知能分野での優れた研究成果と将来性を評価され受賞
+                            </p>
+                            <div class="mt-4 text-sm text-korean-blue/60">
+                                35歳以下の研究者を対象とした権威ある賞
+                            </div>
+                        </div>
+
+                        <div class="achievement-card reveal" style="animation-delay: 0.3s;">
+                            <div class="award-icon award-accent">
+                                <i data-feather="zap" class="w-10 h-10"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">Innovation Excellence Award</h3>
+                            <p class="text-korean-light-blue font-semibold mb-2">Tech Innovations Inc. 2023</p>
+                            <p class="text-korean-blue/70 leading-relaxed">
+                                社内での技術革新と業績向上への貢献を評価され受賞
+                            </p>
+                            <div class="mt-4 text-sm text-korean-blue/60">
+                                年間最優秀社員として選出
+                            </div>
+                        </div>
+
+                        <div class="achievement-card reveal" style="animation-delay: 0.4s;">
+                            <div class="award-icon award-silver">
+                                <i data-feather="trophy" class="w-10 h-10"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">Outstanding Paper Award</h3>
+                            <p class="text-korean-light-blue font-semibold mb-2">NeurIPS 2022</p>
+                            <p class="text-korean-blue/70 leading-relaxed">
+                                "Federated Learning with Differential Privacy for Healthcare Applications"
+                            </p>
+                            <div class="mt-4 text-sm text-korean-blue/60">
+                                プライバシー保護機械学習の分野での貢献
+                            </div>
+                        </div>
+
+                        <div class="achievement-card reveal" style="animation-delay: 0.5s;">
+                            <div class="award-icon award-bronze">
+                                <i data-feather="book-open" class="w-10 h-10"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">優秀修士論文賞</h3>
+                            <p class="text-korean-light-blue font-semibold mb-2">東京工業大学 2016</p>
+                            <p class="text-korean-blue/70 leading-relaxed">
+                                修士課程での研究成果が高く評価され、学部代表として受賞
+                            </p>
+                            <div class="mt-4 text-sm text-korean-blue/60">
+                                全修士論文の中から選出される栄誉ある賞
+                            </div>
+                        </div>
+
+                        <div class="achievement-card reveal" style="animation-delay: 0.6s;">
+                            <div class="award-icon award-blue">
+                                <i data-feather="users" class="w-10 h-10"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">Team Leadership Award</h3>
+                            <p class="text-korean-light-blue font-semibold mb-2">Innovation Labs 2020</p>
+                            <p class="text-korean-blue/70 leading-relaxed">
+                                チームマネジメントとプロジェクトの成功に対する貢献を評価
+                            </p>
+                            <div class="mt-4 text-sm text-korean-blue/60">
+                                12名のチームを率いて史上最高の業績を達成
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Publications Tab -->
+                <div id="publications" class="tab-content">
+                    <div class="space-y-6">
+                        <div class="publication-card reveal" style="animation-delay: 0.1s;">
+                            <div class="publication-venue top-tier">ICML 2024</div>
+                            <h3 class="text-xl font-bold mb-2">Efficient Attention Mechanisms for Large Language Models in Low-Resource Settings</h3>
+                            <p class="text-korean-blue/70 mb-3">
+                                <strong>Yuya Ikeda</strong>, Taro Yamada, Hanako Sato
+                            </p>
+                            <p class="text-korean-blue/60 text-sm mb-4">
+                                リソース制約のある環境での大規模言語モデルの効率的な注意機構に関する研究。従来手法と比較して50%の計算量削減を実現。
+                            </p>
+                            <div class="flex items-center text-sm text-korean-blue/60">
+                                <i data-feather="star" class="w-4 h-4 mr-2"></i>
+                                <span class="mr-4">Best Paper Award</span>
+                                <i data-feather="eye" class="w-4 h-4 mr-2"></i>
+                                <span class="mr-4">245 citations</span>
+                                <i data-feather="external-link" class="w-4 h-4 mr-2"></i>
+                                <a href="#" class="text-korean-light-blue hover:underline">Paper</a>
+                            </div>
+                        </div>
+
+                        <div class="publication-card reveal" style="animation-delay: 0.2s;">
+                            <div class="publication-venue conference">NeurIPS 2022</div>
+                            <h3 class="text-xl font-bold mb-2">Federated Learning with Differential Privacy for Healthcare Applications</h3>
+                            <p class="text-korean-blue/70 mb-3">
+                                <strong>Yuya Ikeda</strong>, Kenji Tanaka, Maria Gonzalez
+                            </p>
+                            <p class="text-korean-blue/60 text-sm mb-4">
+                                医療データを用いた連合学習における差分プライバシーの実装と評価。患者のプライバシーを保護しながら高精度なAIモデルを構築。
+                            </p>
+                            <div class="flex items-center text-sm text-korean-blue/60">
+                                <i data-feather="award" class="w-4 h-4 mr-2"></i>
+                                <span class="mr-4">Outstanding Paper</span>
+                                <i data-feather="eye" class="w-4 h-4 mr-2"></i>
+                                <span class="mr-4">189 citations</span>
+                                <i data-feather="external-link" class="w-4 h-4 mr-2"></i>
+                                <a href="#" class="text-korean-light-blue hover:underline">Paper</a>
+                            </div>
+                        </div>
+
+                        <div class="publication-card reveal" style="animation-delay: 0.3s;">
+                            <div class="publication-venue journal">Nature Machine Intelligence</div>
+                            <h3 class="text-xl font-bold mb-2">Multimodal Learning for Autonomous Systems: A Comprehensive Survey</h3>
+                            <p class="text-korean-blue/70 mb-3">
+                                <strong>Yuya Ikeda</strong>, Lisa Chen, Robert Kim, Alex Johnson
+                            </p>
+                            <p class="text-korean-blue/60 text-sm mb-4">
+                                自律システムにおけるマルチモーダル学習の包括的な調査論文。視覚、音声、テキストの統合学習手法を体系的に分析。
+                            </p>
+                            <div class="flex items-center text-sm text-korean-blue/60">
+                                <i data-feather="book" class="w-4 h-4 mr-2"></i>
+                                <span class="mr-4">Survey Paper</span>
+                                <i data-feather="eye" class="w-4 h-4 mr-2"></i>
+                                <span class="mr-4">342 citations</span>
+                                <i data-feather="external-link" class="w-4 h-4 mr-2"></i>
+                                <a href="#" class="text-korean-light-blue hover:underline">Paper</a>
+                            </div>
+                        </div>
+
+                        <div class="publication-card reveal" style="animation-delay: 0.4s;">
+                            <div class="publication-venue conference">ICLR 2023</div>
+                            <h3 class="text-xl font-bold mb-2">Adversarial Training with Gradient Regularization for Robust Neural Networks</h3>
+                            <p class="text-korean-blue/70 mb-3">
+                                Hiroshi Nakamura, <strong>Yuya Ikeda</strong>, Sarah Williams
+                            </p>
+                            <p class="text-korean-blue/60 text-sm mb-4">
+                                勾配正則化を用いた敵対的学習により、ロバストなニューラルネットワークの構築手法を提案。
+                            </p>
+                            <div class="flex items-center text-sm text-korean-blue/60">
+                                <i data-feather="shield" class="w-4 h-4 mr-2"></i>
+                                <span class="mr-4">Robustness</span>
+                                <i data-feather="eye" class="w-4 h-4 mr-2"></i>
+                                <span class="mr-4">156 citations</span>
+                                <i data-feather="external-link" class="w-4 h-4 mr-2"></i>
+                                <a href="#" class="text-korean-light-blue hover:underline">Paper</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Presentations Tab -->
+                <div id="presentations" class="tab-content">
+                    <div class="timeline-container">
+                        <div class="timeline-item reveal" style="animation-delay: 0.1s;">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-korean-blue">Keynote: The Future of AI in Healthcare</h3>
+                                    <p class="text-korean-light-blue font-semibold">AI Healthcare Summit 2024</p>
+                                </div>
+                                <span class="bg-korean-light-blue/10 text-korean-light-blue px-3 py-1 rounded-full text-sm font-semibold">
+                                    Tokyo
+                                </span>
+                            </div>
+                            <p class="text-korean-blue/70 leading-relaxed mb-4">
+                                医療分野におけるAIの将来展望について基調講演。プライバシー保護技術と連合学習の重要性を強調。
+                            </p>
+                            <div class="flex items-center text-sm text-korean-blue/60">
+                                <i data-feather="users" class="w-4 h-4 mr-2"></i>
+                                <span class="mr-4">500+ participants</span>
+                                <i data-feather="calendar" class="w-4 h-4 mr-2"></i>
+                                <span>March 2024</span>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item reveal" style="animation-delay: 0.2s;">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-korean-blue">Invited Talk: Efficient LLM Training Strategies</h3>
+                                    <p class="text-korean-light-blue font-semibold">ML Conference Japan 2023</p>
+                                </div>
+                                <span class="bg-korean-accent/10 text-korean-accent px-3 py-1 rounded-full text-sm font-semibold">
+                                    Osaka
+                                </span>
+                            </div>
+                            <p class="text-korean-blue/70 leading-relaxed mb-4">
+                                大規模言語モデルの効率的な学習戦略について招待講演。計算コスト削減と性能向上の両立について議論。
+                            </p>
+                            <div class="flex items-center text-sm text-korean-blue/60">
+                                <i data-feather="users" class="w-4 h-4 mr-2"></i>
+                                <span class="mr-4">300+ participants</span>
+                                <i data-feather="calendar" class="w-4 h-4 mr-2"></i>
+                                <span>November 2023</span>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item reveal" style="animation-delay: 0.3s;">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-korean-blue">Workshop: Privacy-Preserving Machine Learning</h3>
+                                    <p class="text-korean-light-blue font-semibold">ICML 2023 Workshop</p>
+                                </div>
+                                <span class="bg-purple-500/10 text-purple-500 px-3 py-1 rounded-full text-sm font-semibold">
+                                    Honolulu
+                                </span>
+                            </div>
+                            <p class="text-korean-blue/70 leading-relaxed mb-4">
+                                プライバシー保護機械学習に関するワークショップで発表。差分プライバシーの実用化について議論。
+                            </p>
+                            <div class="flex items-center text-sm text-korean-blue/60">
+                                <i data-feather="users" class="w-4 h-4 mr-2"></i>
+                                <span class="mr-4">150+ participants</span>
+                                <i data-feather="calendar" class="w-4 h-4 mr-2"></i>
+                                <span>July 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifications Tab -->
+                <div id="certifications" class="tab-content">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="achievement-card reveal" style="animation-delay: 0.1s;">
+                            <div class="award-icon award-blue">
+                                <i data-feather="cloud" class="w-10 h-10"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">AWS Solutions Architect Professional</h3>
+                            <p class="text-korean-light-blue font-semibold mb-2">Amazon Web Services</p>
+                            <p class="text-korean-blue/70 leading-relaxed mb-4">
+                                クラウドアーキテクチャの設計と実装における最上位の認定資格
+                            </p>
+                            <div class="text-sm text-korean-blue/60">
+                                <i data-feather="calendar" class="w-4 h-4 mr-2 inline"></i>
+                                Certified: 2022 | Valid until: 2025
+                            </div>
+                        </div>
+
+                        <div class="achievement-card reveal" style="animation-delay: 0.2s;">
+                            <div class="award-icon award-accent">
+                                <i data-feather="cpu" class="w-10 h-10"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">Google Cloud Professional ML Engineer</h3>
+                            <p class="text-korean-light-blue font-semibold mb-2">Google Cloud Platform</p>
+                            <p class="text-korean-blue/70 leading-relaxed mb-4">
+                                機械学習ソリューションの設計と実装における専門認定
+                            </p>
+                            <div class="text-sm text-korean-blue/60">
+                                <i data-feather="calendar" class="w-4 h-4 mr-2 inline"></i>
+                                Certified: 2023 | Valid until: 2025
+                            </div>
+                        </div>
+
+                        <div class="achievement-card reveal" style="animation-delay: 0.3s;">
+                            <div class="award-icon award-gold">
+                                <i data-feather="shield" class="w-10 h-10"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">Certified Kubernetes Administrator</h3>
+                            <p class="text-korean-light-blue font-semibold mb-2">Cloud Native Computing Foundation</p>
+                            <p class="text-korean-blue/70 leading-relaxed mb-4">
+                                Kubernetesクラスターの管理と運用における認定資格
+                            </p>
+                            <div class="text-sm text-korean-blue/60">
+                                <i data-feather="calendar" class="w-4 h-4 mr-2 inline"></i>
+                                Certified: 2023 | Valid until: 2026
+                            </div>
+                        </div>
+
+                        <div class="achievement-card reveal" style="animation-delay: 0.4s;">
+                            <div class="award-icon award-silver">
+                                <i data-feather="database" class="w-10 h-10"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">TensorFlow Developer Certificate</h3>
+                            <p class="text-korean-light-blue font-semibold mb-2">Google Developers</p>
+                            <p class="text-korean-blue/70 leading-relaxed mb-4">
+                                TensorFlowを用いたディープラーニングモデル開発の認定
+                            </p>
+                            <div class="text-sm text-korean-blue/60">
+                                <i data-feather="calendar" class="w-4 h-4 mr-2 inline"></i>
+                                Certified: 2021 | Valid until: 2024
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-32 bg-gradient-to-br from-korean-blue to-korean-light-blue relative overflow-hidden">
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+            
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center relative z-10">
+                <div class="reveal">
+                    <h2 class="text-4xl sm:text-5xl font-black text-white mb-8">
+                        Collaborate on Innovation
+                    </h2>
+                    <p class="text-xl text-white/80 mb-12 max-w-2xl mx-auto">
+                        研究から実装まで、一緒に革新的なソリューションを創造しませんか？
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                        <a href="contact.html" class="inline-flex items-center bg-white text-korean-blue px-8 py-4 rounded-full font-bold hover:shadow-2xl transform hover:-translate-y-1 transition-all">
+                            Get in Touch
+                            <i data-feather="arrow-right" class="w-5 h-5 ml-2"></i>
+                        </a>
+                        <a href="works.html" class="inline-flex items-center bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-korean-blue transition-all">
+                            View My Works
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-korean-blue text-white py-16 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-korean-blue via-korean-light-blue to-korean-blue opacity-50"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="flex justify-center space-x-8 mb-8">
+                <a href="#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110">
+                    <i data-feather="github" class="w-6 h-6"></i>
+                </a>
+                <a href="#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110">
+                    <i data-feather="linkedin" class="w-6 h-6"></i>
+                </a>
+                <a href="#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110">
+                    <i data-feather="twitter" class="w-6 h-6"></i>
+                </a>
+            </div>
+            <p class="text-white/60 font-medium">
+                &copy; 2025 Yuya Ikeda. All rights reserved. | Innovation in Motion
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Feather Icons
+        feather.replace();
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.querySelector('.menu-icon');
+        const closeIcon = document.querySelector('.close-icon');
+
+        function toggleMobileMenu() {
+            const isOpen = mobileMenu.classList.contains('active');
+            if (isOpen) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        }
+
+        function openMobileMenu() {
+            mobileMenu.classList.add('active');
+            menuIcon.classList.add('hidden');
+            closeIcon.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        }, { passive: true });
+
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetTab = button.dataset.tab;
+                
+                // Update active button
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Update active content
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === targetTab) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Counter Animation
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const counter = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target;
+                    clearInterval(counter);
+                } else {
+                    element.textContent = Math.floor(start);
+                }
+            }, 16);
+        }
+
+        // Initialize counters when visible
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                    const target = parseInt(entry.target.dataset.target);
+                    animateCounter(entry.target, target);
+                    entry.target.classList.add('counted');
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const animationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Observe animation elements
+            const elementsToAnimate = document.querySelectorAll('.reveal, .reveal-scale, .reveal-slide-left, .reveal-slide-right');
+            elementsToAnimate.forEach(el => {
+                animationObserver.observe(el);
+            });
+
+            // Observe counter elements
+            const counters = document.querySelectorAll('[data-target]');
+            counters.forEach(counter => {
+                counterObserver.observe(counter);
+            });
+        });
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+    </script>
+</body>
+</html>
