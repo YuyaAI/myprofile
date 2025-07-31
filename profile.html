@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>プロフィール | 池田 悠耶</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'korean-blue': '#001B3A',
+                        'korean-light-blue': '#0066CC',
+                        'korean-silver': '#E8F4FD',
+                        'korean-accent': '#FF6B35'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <style>
+        :root {
+            --korean-blue: #001B3A;
+            --korean-light-blue: #0066CC;
+            --korean-silver: #E8F4FD;
+            --korean-accent: #FF6B35;
+            --gradient-primary: linear-gradient(135deg, #001B3A 0%, #0066CC 100%);
+            --gradient-secondary: linear-gradient(135deg, #E8F4FD 0%, #ffffff 100%);
+            --shadow-primary: 0 20px 40px rgba(0, 27, 58, 0.15);
+            --shadow-hover: 0 30px 60px rgba(0, 27, 58, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            color: var(--korean-blue);
+            font-weight: 400;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            font-size: clamp(14px, 2.5vw, 16px);
+        }
+
+        /* Responsive Typography */
+        h1 {
+            font-size: clamp(2rem, 8vw, 4.5rem) !important;
+            line-height: 1.1 !important;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: clamp(1.75rem, 6vw, 3rem) !important;
+            line-height: 1.2 !important;
+            font-weight: 800;
+        }
+
+        h3 {
+            font-size: clamp(1.25rem, 4vw, 2rem) !important;
+            line-height: 1.3 !important;
+            font-weight: 700;
+        }
+
+        h4 {
+            font-size: clamp(1rem, 3vw, 1.25rem) !important;
+            line-height: 1.4 !important;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: clamp(0.875rem, 3vw, 1.125rem);
+            line-height: 1.7;
+            word-break: break-word;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--korean-silver);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--korean-light-blue);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--korean-blue);
+        }
+
+        /* Header Styles */
+        .header-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 27, 58, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .header-scrolled {
+            background: rgba(0, 27, 58, 0.95);
+            color: white;
+        }
+
+        /* Logo responsive */
+        .logo {
+            font-size: clamp(1.25rem, 4vw, 2rem) !important;
+            font-weight: 900;
+        }
+
+        /* Navigation - Desktop */
+        .nav-item {
+            position: relative;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            font-size: clamp(0.75rem, 2vw, 0.875rem);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: clamp(8px, 2vw, 10px) clamp(12px, 3vw, 20px);
+            border-radius: 25px;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-primary);
+            border-radius: 25px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .nav-item:hover::before,
+        .nav-item.active::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, rgba(0, 27, 58, 0.98) 0%, rgba(0, 102, 204, 0.98) 100%);
+            backdrop-filter: blur(20px);
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-item {
+            color: white;
+            transition: all 0.3s ease;
+            padding: clamp(16px, 4vw, 20px) 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: clamp(1rem, 4vw, 1.25rem);
+            font-weight: 600;
+            min-height: clamp(50px, 12vw, 60px);
+        }
+
+        .mobile-nav-item:hover {
+            color: var(--korean-accent);
+            transform: translateX(10px);
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            padding: clamp(8px, 2vw, 12px);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(0, 27, 58, 0.1);
+        }
+
+        /* Hero Gradient Text */
+        .hero-gradient {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Timeline - Responsive */
+        .timeline-container {
+            position: relative;
+            padding-left: clamp(0px, 8vw, 40px);
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: clamp(0px, 4vw, 15px);
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--korean-light-blue), var(--korean-accent));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: clamp(20px, 5vw, 32px);
+            background: white;
+            border-radius: clamp(12px, 3vw, 16px);
+            padding: clamp(16px, 4vw, 24px);
+            box-shadow: 0 10px 30px rgba(0, 27, 58, 0.08);
+            border: 1px solid rgba(0, 27, 58, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: clamp(-24px, -6vw, -35px);
+            top: clamp(20px, 5vw, 32px);
+            width: clamp(8px, 2vw, 12px);
+            height: clamp(8px, 2vw, 12px);
+            background: var(--korean-light-blue);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
+            z-index: 10;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .timeline-item:hover::before {
+            background: var(--korean-accent);
+            transform: scale(1.2);
+        }
+
+        /* Profile Image - Responsive */
+        .profile-image {
+            width: 100%;
+            height: clamp(250px, 50vw, 400px);
+            object-fit: cover;
+            border-radius: clamp(16px, 4vw, 20px);
+            box-shadow: var(--shadow-primary);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .profile-image:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Profile Info Card - Responsive */
+        .profile-info-card {
+            margin-top: clamp(16px, 4vw, 24px);
+            background: white;
+            border-radius: clamp(16px, 4vw, 20px);
+            padding: clamp(16px, 4vw, 24px);
+            box-shadow: 0 10px 25px rgba(0, 27, 58, 0.1);
+            border: 1px solid rgba(0, 27, 58, 0.05);
+        }
+
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .reveal-slide-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-slide-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Skills Item - Responsive */
+        .skill-item {
+            background: white;
+            border-radius: clamp(12px, 3vw, 16px);
+            padding: clamp(16px, 4vw, 20px);
+            margin-bottom: clamp(12px, 3vw, 16px);
+            box-shadow: 0 8px 25px rgba(0, 27, 58, 0.08);
+            border: 1px solid rgba(0, 27, 58, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 27, 58, 0.15);
+        }
+
+        /* Skills Grid - Responsive */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: clamp(1rem, 4vw, 1.5rem);
+        }
+
+        /* CTA Buttons - Responsive */
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            padding: clamp(12px, 3vw, 16px) clamp(20px, 5vw, 32px);
+            border-radius: 50px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            font-size: clamp(0.75rem, 3vw, 0.875rem);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(6px, 2vw, 10px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-primary);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            min-height: clamp(40px, 10vw, 48px);
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--korean-blue);
+            padding: clamp(12px, 3vw, 16px) clamp(20px, 5vw, 32px);
+            border: 2px solid var(--korean-light-blue);
+            border-radius: 50px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            font-size: clamp(0.75rem, 3vw, 0.875rem);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(6px, 2vw, 10px);
+            min-height: clamp(40px, 10vw, 48px);
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-primary);
+        }
+
+        /* Container improvements */
+        .container {
+            padding-left: clamp(1rem, 4vw, 2rem);
+            padding-right: clamp(1rem, 4vw, 2rem);
+            max-width: 100%;
+        }
+
+        /* Section spacing */
+        .section-py {
+            padding-top: clamp(4rem, 10vw, 8rem);
+            padding-bottom: clamp(4rem, 10vw, 8rem);
+        }
+
+        /* Profile layout - Responsive */
+        .profile-layout {
+            display: grid;
+            gap: clamp(2rem, 6vw, 4rem);
+            grid-template-columns: 1fr;
+            align-items: start;
+        }
+
+        @media (min-width: 1024px) {
+            .profile-layout {
+                grid-template-columns: 2fr 3fr;
+            }
+        }
+
+        /* Profile sidebar - Sticky on desktop */
+        .profile-sidebar {
+            position: relative;
+        }
+
+        @media (min-width: 1024px) {
+            .profile-sidebar {
+                position: sticky;
+                top: clamp(120px, 15vh, 160px);
+            }
+        }
+
+        /* Text improvements */
+        .text-balance {
+            text-wrap: balance;
+        }
+
+        .break-words {
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Contact info responsive */
+        .contact-info {
+            display: flex;
+            align-items: center;
+            font-size: clamp(0.75rem, 2.5vw, 0.875rem);
+            margin-bottom: clamp(8px, 2vw, 12px);
+        }
+
+        .contact-info i {
+            width: clamp(14px, 3vw, 16px);
+            height: clamp(14px, 3vw, 16px);
+            margin-right: clamp(8px, 2vw, 12px);
+            flex-shrink: 0;
+        }
+
+        /* Prose improvements */
+        .prose {
+            max-width: none;
+        }
+
+        .prose p {
+            margin-bottom: clamp(16px, 4vw, 24px);
+        }
+
+        /* Timeline responsive adjustments */
+        @media (max-width: 768px) {
+            .timeline-container {
+                padding-left: 0;
+            }
+            
+            .timeline-container::before {
+                display: none;
+            }
+            
+            .timeline-item::before {
+                display: none;
+            }
+        }
+
+        /* Profile layout mobile adjustments */
+        @media (max-width: 1023px) {
+            .profile-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-sidebar {
+                order: 1;
+            }
+            
+            .profile-content {
+                order: 2;
+            }
+        }
+
+        /* Timeline date badges - responsive */
+        .timeline-date {
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--korean-accent);
+            padding: clamp(4px, 1vw, 6px) clamp(8px, 2vw, 12px);
+            border-radius: 50px;
+            font-size: clamp(0.7rem, 2vw, 0.875rem);
+            font-weight: 600;
+            margin-top: clamp(8px, 2vw, 12px);
+            display: inline-block;
+        }
+
+        @media (min-width: 640px) {
+            .timeline-date {
+                margin-top: 0;
+            }
+        }
+
+        /* Skills icon sizing */
+        .skill-icon {
+            width: clamp(40px, 8vw, 48px);
+            height: clamp(40px, 8vw, 48px);
+            margin-right: clamp(12px, 3vw, 16px);
+            flex-shrink: 0;
+        }
+
+        .skill-icon i {
+            width: clamp(20px, 4vw, 24px);
+            height: clamp(20px, 4vw, 24px);
+        }
+
+        /* Tag responsive sizing */
+        .skill-tag {
+            padding: clamp(4px, 1vw, 6px) clamp(8px, 2vw, 12px);
+            font-size: clamp(0.65rem, 2vw, 0.75rem);
+            border-radius: 50px;
+            margin: clamp(2px, 0.5vw, 4px);
+            display: inline-block;
+        }
+
+        /* Hero section mobile adjustments */
+        .hero-section {
+            padding-top: clamp(100px, 20vw, 128px);
+            padding-bottom: clamp(60px, 12vw, 80px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 header-glass">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center h-16 sm:h-20">
+                <div class="logo">
+                    <a href="index.html" class="hero-gradient">Y.I</a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center space-x-1 xl:space-x-2">
+                    <a href="index.html" class="nav-item">ホーム</a>
+                    <a href="profile.html" class="nav-item active">プロフィール</a>
+                    <a href="works.html" class="nav-item">研究・業績</a>
+                    <a href="achievements.html" class="nav-item">受賞・認定</a>
+                    <a href="skills.html" class="nav-item">専門分野</a>
+                    <a href="news.html" class="nav-item">ニュース</a>
+                    <a href="contact.html" class="nav-item">お問い合わせ</a>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="mobile-menu-btn lg:hidden">
+                    <svg class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-y-0 right-0 w-full z-40 lg:hidden">
+        <div class="p-6 pt-24">
+            <nav class="space-y-0">
+                <a href="index.html" class="mobile-nav-item">ホーム</a>
+                <a href="profile.html" class="mobile-nav-item">プロフィール</a>
+                <a href="works.html" class="mobile-nav-item">研究・業績</a>
+                <a href="achievements.html" class="mobile-nav-item">受賞・認定</a>
+                <a href="skills.html" class="mobile-nav-item">専門分野</a>
+                <a href="news.html" class="mobile-nav-item">ニュース</a>
+                <a href="contact.html" class="mobile-nav-item">お問い合わせ</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section px-4 bg-gradient-to-br from-korean-silver/30 to-white">
+            <div class="container mx-auto max-w-6xl">
+                <div class="text-center">
+                    <div class="reveal mb-6">
+                        <span class="inline-block px-4 py-2 bg-korean-light-blue/10 text-korean-light-blue rounded-full text-sm font-bold mb-4">
+                            プロフィール
+                        </span>
+                        <h1 class="font-black mb-6 text-balance">
+                            <span class="hero-gradient">Profile</span>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Content -->
+        <section class="section-py">
+            <div class="container mx-auto max-w-6xl">
+                <div class="profile-layout">
+                    <!-- Profile Image & Basic Info -->
+                    <div class="profile-sidebar">
+                        <div class="reveal-scale">
+                            <img src="llspp.png"
+                                 alt="池田 悠耶" 
+                                 class="profile-image">
+                            
+                            <div class="profile-info-card">
+                                <h2 class="font-bold mb-2 break-words">池田 悠耶</h2>
+                                <p class="text-korean-light-blue font-semibold mb-4 break-words" style="font-size: clamp(1rem, 3vw, 1.125rem);">
+                                    Yuya Ikeda
+                                </p>
+                                <p class="text-korean-accent font-bold mb-6 break-words" style="font-size: clamp(0.875rem, 2.5vw, 1rem);">
+                                    長崎県立大学大学院 地域創生学研究科 情報工学専攻
+                                </p>
+                                
+                                <div class="space-y-3">
+                                    <div class="contact-info">
+                                        <i data-feather="map-pin" class="text-korean-light-blue"></i>
+                                        <span class="break-words">Nagasaki,JP</span>
+                                    </div>
+                                    <div class="contact-info">
+                                        <i data-feather="mail" class="text-korean-light-blue"></i>
+                                        <span class="break-words">yuya-i1@proton.me</span>
+                                    </div>
+                                    <div class="contact-info">
+                                        <i data-feather="phone" class="text-korean-light-blue"></i>
+                                        <span class="break-words">090-9237-5825</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Main Content -->
+                    <div class="profile-content">
+                        <!-- About Section -->
+                        <div class="reveal mb-12 md:mb-16">
+                            <h3 class="font-bold mb-6 text-balance">研究活動について</h3>
+                            <div class="prose">
+                                <p class="text-korean-blue/80 leading-relaxed break-words">
+                                    データで社会を読み解くことをテーマに研究に取り組んでいます。何気ない日常の中にも、データを通して見ることで新たな気づきがあると感じ、それがこの分野に興味を持ったきっかけです。
+                                </p>
+                                <p class="text-korean-blue/80 leading-relaxed break-words">
+                                    現在は、観光地の満足度データを対象に、統計解析や機械学習を用いて、社会にある課題をデータから
+                                    読み解く研究を進めています。
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Key Strengths -->
+                        <div class="reveal mb-12 md:mb-16" style="animation-delay: 0.2s;">
+                            <h3 class="font-bold mb-6 text-balance">研究の特色</h3>
+                            <div class="skills-grid">
+                                <div class="skill-item">
+                                    <div class="flex items-start">
+                                        <div class="skill-icon bg-korean-light-blue/10 rounded-lg flex items-center justify-center">
+                                            <i data-feather="zap" class="text-korean-light-blue"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-bold mb-2 break-words">準備中</h4>
+                                            <p class="text-korean-blue/70 break-words" style="font-size: clamp(0.75rem, 2.5vw, 0.875rem);">///</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="skill-item">
+                                    <div class="flex items-start">
+                                        <div class="skill-icon bg-korean-accent/10 rounded-lg flex items-center justify-center">
+                                            <i data-feather="users" class="text-korean-accent"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-bold mb-2 break-words">準備中</h4>
+                                            <p class="text-korean-blue/70 break-words" style="font-size: clamp(0.75rem, 2.5vw, 0.875rem);">///</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="skill-item">
+                                    <div class="flex items-start">
+                                        <div class="skill-icon bg-purple-500/10 rounded-lg flex items-center justify-center">
+                                            <i data-feather="globe" class="text-purple-500"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-bold mb-2 break-words">準備中</h4>
+                                            <p class="text-korean-blue/70 break-words" style="font-size: clamp(0.75rem, 2.5vw, 0.875rem);">///</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Career Timeline -->
+                        <div class="reveal" style="animation-delay: 0.4s;">
+                            <h3 class="font-bold mb-8 md:mb-12 text-balance">経歴</h3>
+                            
+                            <div class="timeline-container">
+                                <div class="timeline-item reveal" style="animation-delay: 0.5s;">
+                                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4">
+                                        <div class="flex-1">
+                                            <h4 class="font-bold text-korean-blue mb-1 break-words">鎮西学院大学　ティーチング・アシスタント</h4>
+                                            <p class="text-korean-light-blue font-semibold break-words">総合社会学部　経済政策学科</p>
+                                        </div>
+                                        <span class="timeline-date">
+                                            2025年10月 - 現在
+                                        </span>
+                                    </div>
+                                    <p class="text-korean-blue/70 leading-relaxed mb-4 break-words">
+                                        担当科目：データサイエンス、AI基礎
+                                    </p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="skill-tag bg-korean-silver text-korean-blue">データサイエンス</span>
+                                        <span class="skill-tag bg-korean-silver text-korean-blue">AI基礎</span>
+                                        <span class="skill-tag bg-korean-silver text-korean-blue">AI教育プロブラム</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="timeline-item reveal" style="animation-delay: 0.6s;">
+                                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4">
+                                        <div class="flex-1">
+                                            <h4 class="font-bold text-korean-blue mb-1 break-words">長崎県立大学大学院　地域創生研究科</h4>
+                                            <p class="text-korean-light-blue font-semibold break-words">情報工学専攻　人間情報科学コース</p>
+                                        </div>
+                                        <span class="timeline-date" style="background: rgba(0, 102, 204, 0.1); color: var(--korean-light-blue);">
+                                            2025年4月 - 現在
+                                        </span>
+                                    </div>
+                                    <p class="text-korean-blue/70 leading-relaxed mb-4 break-words">
+                                        長崎市に寄港するクルーズ船観光客を対象に、訪問した観光地が全体的な満足度に与える影響を分析する研究を行っています。
+                                    </p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="skill-tag bg-korean-silver text-korean-blue">研究</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-korean-blue text-white py-12 md:py-16 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-korean-blue via-korean-light-blue to-korean-blue opacity-50"></div>
+        <div class="container mx-auto text-center relative z-10">
+            <p class="text-white/60 font-medium break-words" style="font-size: clamp(0.75rem, 2.5vw, 0.875rem);">
+                &copy; 2025 YuyaIkeda. All rights reserved. 
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Feather Icons
+        feather.replace();
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.querySelector('.menu-icon');
+        const closeIcon = document.querySelector('.close-icon');
+
+        function toggleMobileMenu() {
+            const isOpen = mobileMenu.classList.contains('active');
+            if (isOpen) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        }
+
+        function openMobileMenu() {
+            mobileMenu.classList.add('active');
+            menuIcon.classList.add('hidden');
+            closeIcon.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        }, { passive: true });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const animationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Observe animation elements
+            const elementsToAnimate = document.querySelectorAll('.reveal, .reveal-scale, .reveal-slide-right');
+            elementsToAnimate.forEach(el => {
+                animationObserver.observe(el);
+            });
+        });
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+
+        // Touch event handling for mobile
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', e => {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            if (touchEndY < touchStartY - 50) {
+                // Swipe up
+                if (mobileMenu.classList.contains('active')) {
+                    closeMobileMenu();
+                }
+            }
+        }
+
+        // Prevent horizontal scroll
+        document.addEventListener('touchmove', function(e) {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // Optimize for mobile performance
+        let ticking = false;
+        function updateOnScroll() {
+            // Throttle scroll events
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', updateOnScroll, { passive: true });
+    </script>
+</body>
+</html>

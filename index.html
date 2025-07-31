@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>池田 悠耶 | プロフィール</title>
     
     <!-- Tailwind CSS -->
@@ -57,6 +57,33 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
+            font-size: clamp(14px, 2.5vw, 16px);
+        }
+
+        /* Responsive Typography */
+        h1 {
+            font-size: clamp(2rem, 8vw, 4.5rem) !important;
+            line-height: 1.1 !important;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: clamp(1.75rem, 6vw, 3rem) !important;
+            line-height: 1.2 !important;
+            font-weight: 800;
+        }
+
+        h3 {
+            font-size: clamp(1.25rem, 4vw, 1.5rem) !important;
+            line-height: 1.3 !important;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: clamp(0.875rem, 3vw, 1.125rem);
+            line-height: 1.7;
+            word-break: break-word;
         }
 
         /* Smooth Scrolling */
@@ -66,7 +93,7 @@
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
         ::-webkit-scrollbar-track {
             background: var(--korean-silver);
@@ -89,8 +116,8 @@
         .floating-1 {
             top: 10%;
             right: 10%;
-            width: 200px;
-            height: 200px;
+            width: clamp(100px, 20vw, 200px);
+            height: clamp(100px, 20vw, 200px);
             background: radial-gradient(circle, rgba(0, 102, 204, 0.1) 0%, transparent 70%);
             border-radius: 50%;
             animation: float 8s ease-in-out infinite;
@@ -99,8 +126,8 @@
         .floating-2 {
             bottom: 20%;
             left: 5%;
-            width: 150px;
-            height: 150px;
+            width: clamp(75px, 15vw, 150px);
+            height: clamp(75px, 15vw, 150px);
             background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
             border-radius: 50%;
             animation: float 6s ease-in-out infinite reverse;
@@ -126,14 +153,20 @@
             color: white;
         }
 
+        /* Logo responsive */
+        .logo {
+            font-size: clamp(1.25rem, 4vw, 2rem) !important;
+            font-weight: 900;
+        }
+
         /* Navigation - Desktop */
         .nav-item {
             position: relative;
             font-weight: 600;
             letter-spacing: 0.05em;
-            font-size: 0.875rem;
+            font-size: clamp(0.75rem, 2vw, 0.875rem);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 10px 20px;
+            padding: clamp(8px, 2vw, 10px) clamp(12px, 3vw, 20px);
             border-radius: 25px;
             text-decoration: none;
             white-space: nowrap;
@@ -178,12 +211,14 @@
         .mobile-nav-item {
             color: white;
             transition: all 0.3s ease;
-            padding: 16px 0;
+            padding: clamp(16px, 4vw, 20px) 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             text-decoration: none;
-            display: block;
-            font-size: 1.125rem;
+            display: flex;
+            align-items: center;
+            font-size: clamp(1rem, 4vw, 1.25rem);
             font-weight: 600;
+            min-height: clamp(50px, 12vw, 60px);
         }
 
         .mobile-nav-item:hover {
@@ -193,7 +228,7 @@
 
         /* Mobile Menu Button */
         .mobile-menu-btn {
-            padding: 12px;
+            padding: clamp(8px, 2vw, 12px);
             border-radius: 8px;
             transition: all 0.3s ease;
             background: transparent;
@@ -205,26 +240,29 @@
             background: rgba(0, 27, 58, 0.1);
         }
 
-        /* Premium Button Styles */
+        /* Premium Button Styles - Responsive */
         .btn-primary {
             background: var(--gradient-primary);
             color: white;
-            padding: 16px 32px;
+            padding: clamp(12px, 3vw, 16px) clamp(20px, 5vw, 32px);
             border-radius: 50px;
             font-weight: 700;
             letter-spacing: 0.05em;
-            font-size: 0.875rem;
+            font-size: clamp(0.75rem, 3vw, 0.875rem);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            gap: clamp(6px, 2vw, 10px);
             position: relative;
             overflow: hidden;
             box-shadow: var(--shadow-primary);
             text-decoration: none;
             border: none;
             cursor: pointer;
-            min-height: 48px;
+            min-height: clamp(40px, 10vw, 48px);
+            width: 100%;
+            max-width: 280px;
         }
 
         .btn-primary::before {
@@ -253,20 +291,23 @@
         .btn-secondary {
             background: transparent;
             color: var(--korean-blue);
-            padding: 16px 32px;
+            padding: clamp(12px, 3vw, 16px) clamp(20px, 5vw, 32px);
             border: 2px solid var(--korean-light-blue);
             border-radius: 50px;
             font-weight: 700;
             letter-spacing: 0.05em;
-            font-size: 0.875rem;
+            font-size: clamp(0.75rem, 3vw, 0.875rem);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            min-height: 48px;
+            justify-content: center;
+            gap: clamp(6px, 2vw, 10px);
+            min-height: clamp(40px, 10vw, 48px);
+            width: 100%;
+            max-width: 280px;
         }
 
         .btn-secondary::before {
@@ -294,16 +335,17 @@
             z-index: 1;
         }
 
-        /* Premium Card Styles */
+        /* Premium Card Styles - Responsive */
         .premium-card {
             background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-            border-radius: 20px;
-            padding: 32px;
+            border-radius: clamp(16px, 4vw, 20px);
+            padding: clamp(20px, 5vw, 32px);
             border: 1px solid rgba(0, 27, 58, 0.1);
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 27, 58, 0.08);
+            height: 100%;
         }
 
         .premium-card::before {
@@ -326,7 +368,7 @@
             background: var(--gradient-secondary);
             opacity: 0;
             transition: opacity 0.3s ease;
-            border-radius: 20px;
+            border-radius: clamp(16px, 4vw, 20px);
         }
 
         .premium-card:hover {
@@ -351,7 +393,7 @@
         /* Advanced Reveal Animations */
         .reveal {
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(30px);
             transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -362,7 +404,7 @@
 
         .reveal-scale {
             opacity: 0;
-            transform: scale(0.9) rotate(5deg);
+            transform: scale(0.9) rotate(2deg);
             transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -373,7 +415,7 @@
 
         .reveal-slide-left {
             opacity: 0;
-            transform: translateX(-60px);
+            transform: translateX(-40px);
             transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -384,7 +426,7 @@
 
         .reveal-slide-right {
             opacity: 0;
-            transform: translateX(60px);
+            transform: translateX(40px);
             transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -421,7 +463,7 @@
         /* Stats Counter Animation */
         .stat-number {
             font-weight: 900;
-            font-size: 2.5rem;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
             color: var(--korean-light-blue);
             display: block;
             line-height: 1;
@@ -437,126 +479,103 @@
             50% { transform: translateY(-8px); }
         }
 
-        /* Mobile Responsive Improvements */
-        @media (max-width: 768px) {
-            .floating-1, .floating-2 {
-                display: none;
-            }
-            
-            .premium-card {
-                padding: 24px;
-                border-radius: 16px;
-            }
-            
-            .btn-primary, .btn-secondary {
-                padding: 14px 28px;
-                font-size: 0.875rem;
-                min-height: 44px;
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .stat-number {
-                font-size: 2rem;
-            }
-            
-            /* Header improvements for mobile */
-            .header-glass {
-                padding: 0;
-            }
-            
-            /* Better touch targets */
-            .mobile-nav-item {
-                padding: 20px 0;
-                font-size: 1.25rem;
-                min-height: 60px;
-                display: flex;
-                align-items: center;
-            }
-            
-            /* Logo improvements */
-            .logo {
-                font-size: 1.5rem !important;
-                font-weight: 900;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .premium-card {
-                padding: 20px;
-                border-radius: 12px;
-            }
-            
-            .btn-primary, .btn-secondary {
-                padding: 12px 24px;
-                font-size: 0.8rem;
-                min-height: 40px;
-            }
-            
-            .stat-number {
-                font-size: 1.75rem;
-            }
-        }
-
-        /* Ensure text is readable on all devices */
-        @media (max-width: 768px) {
-            body {
-                font-size: 16px;
-            }
-            
-            h1 {
-                font-size: 2.5rem !important;
-                line-height: 1.2;
-            }
-            
-            h2 {
-                font-size: 2rem !important;
-                line-height: 1.3;
-            }
-            
-            h3 {
-                font-size: 1.5rem !important;
-                line-height: 1.4;
-            }
-            
-            p {
-                font-size: 1rem;
-                line-height: 1.6;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2rem !important;
-            }
-            
-            h2 {
-                font-size: 1.75rem !important;
-            }
-            
-            h3 {
-                font-size: 1.25rem !important;
-            }
-        }
-
-        /* Fix layout issues on mobile */
+        /* Container improvements */
         .container {
-            padding-left: 1rem;
-            padding-right: 1rem;
+            padding-left: clamp(1rem, 4vw, 2rem);
+            padding-right: clamp(1rem, 4vw, 2rem);
+            max-width: 100%;
         }
 
-        @media (min-width: 640px) {
-            .container {
-                padding-left: 1.5rem;
-                padding-right: 1.5rem;
-            }
+        /* Section spacing */
+        .section-py {
+            padding-top: clamp(4rem, 10vw, 8rem);
+            padding-bottom: clamp(4rem, 10vw, 8rem);
+        }
+
+        /* Grid improvements */
+        .responsive-grid {
+            display: grid;
+            gap: clamp(1rem, 4vw, 2rem);
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+        }
+
+        .responsive-grid-2 {
+            display: grid;
+            gap: clamp(2rem, 6vw, 4rem);
+            grid-template-columns: 1fr;
+            align-items: center;
         }
 
         @media (min-width: 1024px) {
-            .container {
-                padding-left: 2rem;
-                padding-right: 2rem;
+            .responsive-grid-2 {
+                grid-template-columns: 1fr 1fr;
             }
+        }
+
+        /* Text improvements */
+        .text-balance {
+            text-wrap: balance;
+        }
+
+        .break-words {
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Button container for mobile */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(0.75rem, 3vw, 1rem);
+            align-items: center;
+            width: 100%;
+        }
+
+        @media (min-width: 640px) {
+            .button-container {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        /* Floating stats improvements */
+        .floating-stat {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: clamp(12px, 3vw, 16px);
+            padding: clamp(16px, 4vw, 24px);
+            box-shadow: 0 10px 25px rgba(0, 27, 58, 0.1);
+            border: 1px solid rgba(0, 27, 58, 0.05);
+            min-width: clamp(120px, 25vw, 160px);
+        }
+
+        /* Hide floating stats on very small screens */
+        @media (max-width: 1200px) {
+            .floating-stat {
+                display: none;
+            }
+        }
+
+        /* Achievement cards responsive */
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+            gap: clamp(1rem, 4vw, 1.5rem);
+        }
+
+        /* Image improvements */
+        .responsive-image {
+            width: 100%;
+            height: auto;
+            border-radius: clamp(12px, 3vw, 16px);
+            object-fit: cover;
+        }
+
+        /* Text content max width */
+        .text-content {
+            max-width: 65ch;
+            margin: 0 auto;
         }
     </style>
 </head>
@@ -569,7 +588,7 @@
     <header id="header" class="fixed top-0 left-0 right-0 z-50 header-glass">
         <div class="container mx-auto">
             <div class="flex justify-between items-center h-16 sm:h-20">
-                <div class="logo text-xl sm:text-2xl font-black tracking-tight">
+                <div class="logo">
                     <span class="hero-gradient">Y.I</span>
                 </div>
                 
@@ -623,17 +642,19 @@
                         </div>
                     </div>
                     
-                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6">
+                    <h1 class="font-black tracking-tight mb-6 text-balance">
                         <span class="block reveal" style="animation-delay: 0.2s;">データを読み解き</span>
                         <span class="block hero-gradient reveal" style="animation-delay: 0.4s;">未来を創造する</span>
                     </h1>
                     
-                    <p class="text-lg sm:text-xl text-korean-blue/70 max-w-3xl mx-auto mb-8 reveal leading-relaxed" style="animation-delay: 0.6s;">
-                        長崎県立大学大学院 情報工学専攻<br>
-                        <span class="font-semibold text-korean-light-blue">機械学習・データサイエンス</span>の研究に従事
-                    </p>
+                    <div class="text-content">
+                        <p class="text-korean-blue/70 mb-8 reveal leading-relaxed break-words" style="animation-delay: 0.6s;">
+                            長崎県立大学大学院 情報工学専攻<br>
+                            <span class="font-semibold text-korean-light-blue">機械学習・データサイエンス</span>の研究に従事
+                        </p>
+                    </div>
                     
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center reveal" style="animation-delay: 0.8s;">
+                    <div class="button-container reveal" style="animation-delay: 0.8s;">
                         <a href="works.html" class="btn-primary">
                             <span>研究成果を見る</span>
                             <i data-feather="arrow-right" class="w-5 h-5"></i>
@@ -645,33 +666,29 @@
                 </div>
                 
                 <!-- Floating Stats -->
-                <div class="absolute top-1/2 left-4 transform -translate-y-1/2 hidden xl:block">
-                    <div class="reveal-slide-left bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-korean-light-blue/10" style="animation-delay: 1s;">
-                        <div class="stat-number" data-target="8">0</div>
-                        <p class="text-sm font-semibold text-korean-blue/70">年間論文数</p>
-                    </div>
+                <div class="floating-stat top-1/2 left-4 transform -translate-y-1/2 reveal-slide-left" style="animation-delay: 1s;">
+                    <div class="stat-number" data-target="8">0</div>
+                    <p class="text-sm font-semibold text-korean-blue/70">年間論文数</p>
                 </div>
                 
-                <div class="absolute top-1/2 right-4 transform -translate-y-1/2 hidden xl:block">
-                    <div class="reveal-slide-right bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-korean-light-blue/10" style="animation-delay: 1.2s;">
-                        <div class="stat-number" data-target="150">0</div>
-                        <p class="text-sm font-semibold text-korean-blue/70">引用回数</p>
-                    </div>
+                <div class="floating-stat top-1/2 right-4 transform -translate-y-1/2 reveal-slide-right" style="animation-delay: 1.2s;">
+                    <div class="stat-number" data-target="150">0</div>
+                    <p class="text-sm font-semibold text-korean-blue/70">引用回数</p>
                 </div>
             </div>
         </section>
 
         <!-- About Section -->
-        <section class="py-16 sm:py-20 md:py-32 bg-gradient-to-br from-korean-silver/30 to-white relative">
+        <section class="section-py bg-gradient-to-br from-korean-silver/30 to-white relative">
             <div class="container mx-auto max-w-6xl">
-                <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                <div class="responsive-grid-2">
                     <div class="order-2 lg:order-1">
                         <div class="reveal-scale relative">
-                            <img src="myprofile.jpg" 
-                                 alt="TP1" 
-                                 class="rounded-2xl shadow-2xl w-full transform hover:scale-105 transition-transform duration-500">
-                            <div class="absolute -bottom-4 -right-4 w-20 h-20 bg-korean-accent rounded-2xl flex items-center justify-center shadow-xl">
-                                <i data-feather="zap" class="w-10 h-10 text-white icon-float"></i>
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=600&fit=crop&crop=face" 
+                                 alt="プロフィール写真" 
+                                 class="responsive-image shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                            <div class="absolute -bottom-4 -right-4 w-16 h-16 sm:w-20 sm:h-20 bg-korean-accent rounded-2xl flex items-center justify-center shadow-xl">
+                                <i data-feather="zap" class="w-8 h-8 sm:w-10 sm:h-10 text-white icon-float"></i>
                             </div>
                         </div>
                     </div>
@@ -681,25 +698,27 @@
                             <span class="inline-block px-4 py-2 bg-korean-light-blue/10 text-korean-light-blue rounded-full text-sm font-bold mb-4">
                                 研究について
                             </span>
-                            <h2 class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 leading-tight">
+                            <h2 class="font-black mb-6 leading-tight text-balance">
                                 データサイエンスで<br>
                                 <span class="hero-gradient">社会課題を解決</span>
                             </h2>
                         </div>
                         
-                        <p class="text-lg text-korean-blue/80 leading-relaxed mb-8 reveal" style="animation-delay: 0.2s;">
-                            データサイエンスの力で、社会に潜む問題を見える化し、改善へのヒントを見つけ出す研究をしています。<br>
-                            研究を通じて、データの持つ力を最大限に引き出し、実社会に貢献することを目指しています。
-                        </p>
+                        <div class="text-content">
+                            <p class="text-korean-blue/80 leading-relaxed mb-8 reveal break-words" style="animation-delay: 0.2s;">
+                                データサイエンスの力で、社会に潜む問題を見える化し、改善へのヒントを見つけ出す研究をしています。<br>
+                                研究を通じて、データの持つ力を最大限に引き出し、実社会に貢献することを目指しています。
+                            </p>
+                        </div>
                         
-                        <div class="grid grid-cols-2 gap-6 reveal" style="animation-delay: 0.4s;">
-                            <div class="text-center p-4 bg-white rounded-2xl shadow-lg border border-korean-light-blue/10">
-                                <div class="text-3xl font-black text-korean-light-blue mb-2" data-target="0">0</div>
-                                <p class="text-korean-blue/70 font-semibold text-sm">準備中</p>
+                        <div class="grid grid-cols-2 gap-4 reveal" style="animation-delay: 0.4s;">
+                            <div class="text-center p-4 bg-white rounded-xl shadow-lg border border-korean-light-blue/10">
+                                <div class="text-2xl sm:text-3xl font-black text-korean-light-blue mb-2" data-target="0">0</div>
+                                <p class="text-korean-blue/70 font-semibold text-xs sm:text-sm break-words">準備中</p>
                             </div>
-                            <div class="text-center p-4 bg-white rounded-2xl shadow-lg border border-korean-light-blue/10">
-                                <div class="text-3xl font-black text-korean-light-blue mb-2" data-target="0">0</div>
-                                <p class="text-korean-blue/70 font-semibold text-sm">共同研究数</p>
+                            <div class="text-center p-4 bg-white rounded-xl shadow-lg border border-korean-light-blue/10">
+                                <div class="text-2xl sm:text-3xl font-black text-korean-light-blue mb-2" data-target="0">0</div>
+                                <p class="text-korean-blue/70 font-semibold text-xs sm:text-sm break-words">共同研究数</p>
                             </div>
                         </div>
                     </div>
@@ -708,44 +727,44 @@
         </section>
 
         <!-- Research Areas Section -->
-        <section class="py-16 sm:py-20 md:py-32 relative">
+        <section class="section-py relative">
             <div class="container mx-auto max-w-6xl">
                 <div class="text-center mb-12 md:mb-20">
                     <div class="reveal mb-6">
                         <span class="inline-block px-4 py-2 bg-korean-accent/10 text-korean-accent rounded-full text-sm font-bold mb-4">
                             研究分野
                         </span>
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black mb-6">専門領域</h2>
+                        <h2 class="font-black mb-6 text-balance">専門領域</h2>
                     </div>
                 </div>
                 
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <div class="responsive-grid">
                     <div class="premium-card group reveal" style="animation-delay: 0s;">
-                        <div class="w-16 h-16 bg-gradient-to-br from-korean-light-blue to-korean-blue rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <i data-feather="cpu" class="w-8 h-8 text-white"></i>
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-korean-light-blue to-korean-blue rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i data-feather="cpu" class="w-6 h-6 sm:w-8 sm:h-8 text-white"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-4">機械学習</h3>
-                        <p class="text-korean-blue/70 leading-relaxed">
+                        <h3 class="font-bold mb-4">機械学習</h3>
+                        <p class="text-korean-blue/70 leading-relaxed break-words">
                             行動データに対する分類・回帰・クラスタリングなどの機械学習手法を応用。予測型システムの構築を目指す。
                         </p>
                     </div>
                     
                     <div class="premium-card group reveal" style="animation-delay: 0.1s;">
-                        <div class="w-16 h-16 bg-gradient-to-br from-korean-accent to-red-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <i data-feather="bar-chart" class="w-8 h-8 text-white"></i>
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-korean-accent to-red-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i data-feather="bar-chart" class="w-6 h-6 sm:w-8 sm:h-8 text-white"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-4">データサイエンス</h3>
-                        <p class="text-korean-blue/70 leading-relaxed">
+                        <h3 class="font-bold mb-4">データサイエンス</h3>
+                        <p class="text-korean-blue/70 leading-relaxed break-words">
                             地域・社会に関するアンケートやログデータの分析を通じて、行動パターンや傾向を明らかにし、社会課題の構造把握と意思決定支援に向けた研究。
                         </p>
                     </div>
                     
                     <div class="premium-card group reveal" style="animation-delay: 0.2s;">
-                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <i data-feather="layout" class="w-8 h-8 text-white"></i>
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i data-feather="layout" class="w-6 h-6 sm:w-8 sm:h-8 text-white"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-4">WEBサイト制作</h3>
-                        <p class="text-korean-blue/70 leading-relaxed">
+                        <h3 class="font-bold mb-4">WEBサイト制作</h3>
+                        <p class="text-korean-blue/70 leading-relaxed break-words">
                             HTML・CSS・JavaScript・Firebaseを用いた教育・研究システムの設計・開発を行い、ユーザー視点のインターフェースとデータ連携を重視した実装を行っています。
                         </p>
                     </div>
@@ -754,47 +773,47 @@
         </section>
 
         <!-- Achievements Section -->
-        <section class="py-16 sm:py-20 md:py-32 bg-gradient-to-br from-korean-blue to-korean-light-blue relative overflow-hidden">
+        <section class="section-py bg-gradient-to-br from-korean-blue to-korean-light-blue relative overflow-hidden">
             <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
             
             <div class="container mx-auto max-w-6xl relative z-10">
                 <div class="text-center mb-12 md:mb-20">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6 reveal">
+                    <h2 class="font-black text-white mb-6 reveal text-balance">
                         主な実績
                     </h2>
                 </div>
                 
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="achievement-grid">
                     <a href="achievements.html" class="group bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-white/20 transition-all duration-300 reveal border border-white/20">
-                        <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                            <i data-feather="award" class="w-8 h-8 text-white"></i>
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                            <i data-feather="award" class="w-6 h-6 sm:w-8 sm:h-8 text-white"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">学術賞受賞</h3>
-                        <div class="text-2xl font-black text-white" data-target="0">0</div>
+                        <h3 class="font-bold text-white mb-3 break-words">学術賞受賞</h3>
+                        <div class="text-xl sm:text-2xl font-black text-white" data-target="0">0</div>
                     </a>
                     
                     <a href="works.html" class="group bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-white/20 transition-all duration-300 reveal border border-white/20" style="animation-delay: 0.1s;">
-                        <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                            <i data-feather="book" class="w-8 h-8 text-white"></i>
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                            <i data-feather="book" class="w-6 h-6 sm:w-8 sm:h-8 text-white"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">論文発表</h3>
-                        <div class="text-2xl font-black text-white" data-target="0">0</div>
+                        <h3 class="font-bold text-white mb-3 break-words">論文発表</h3>
+                        <div class="text-xl sm:text-2xl font-black text-white" data-target="0">0</div>
                     </a>
                     
                     <a href="works.html" class="group bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-white/20 transition-all duration-300 reveal border border-white/20" style="animation-delay: 0.2s;">
-                        <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                            <i data-feather="users" class="w-8 h-8 text-white"></i>
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                            <i data-feather="users" class="w-6 h-6 sm:w-8 sm:h-8 text-white"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">産学連携</h3>
-                        <div class="text-2xl font-black text-white" data-target="0">0</div>
+                        <h3 class="font-bold text-white mb-3 break-words">産学連携</h3>
+                        <div class="text-xl sm:text-2xl font-black text-white" data-target="0">0</div>
                     </a>
                     
                     <a href="contact.html" class="group bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-white/20 transition-all duration-300 reveal border border-white/20" style="animation-delay: 0.3s;">
-                        <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                            <i data-feather="globe" class="w-8 h-8 text-white"></i>
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                            <i data-feather="globe" class="w-6 h-6 sm:w-8 sm:h-8 text-white"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">地域連携</h3>
-                        <div class="text-2xl font-black text-white" data-target="0">0</div>
+                        <h3 class="font-bold text-white mb-3 break-words">地域連携</h3>
+                        <div class="text-xl sm:text-2xl font-black text-white" data-target="0">0</div>
                     </a>
                 </div>
             </div>
@@ -805,7 +824,7 @@
     <footer class="bg-korean-blue text-white py-12 md:py-16 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-korean-blue via-korean-light-blue to-korean-blue opacity-50"></div>
         <div class="container mx-auto text-center relative z-10">
-            <p class="text-white/60 font-medium text-sm">
+            <p class="text-white/60 font-medium text-sm break-words">
                 &copy; 2025 YuyaIkeda. All rights reserved.
             </p>
         </div>
@@ -944,9 +963,6 @@
                     closeMobileMenu();
                 }
             }
-            if (touchEndY > touchStartY + 50) {
-                // Swipe down - could be used for other interactions
-            }
         }
 
         // Smooth scroll for anchor links
@@ -962,6 +978,27 @@
                 }
             });
         });
+
+        // Prevent horizontal scroll
+        document.addEventListener('touchmove', function(e) {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // Optimize for mobile performance
+        let ticking = false;
+        function updateOnScroll() {
+            // Throttle scroll events
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', updateOnScroll, { passive: true });
     </script>
 </body>
 </html>
