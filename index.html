@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>池田 悠耶 | プロフィール</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'korean-blue': '#001B3A',
+                        'korean-light-blue': '#0066CC',
+                        'korean-silver': '#E8F4FD',
+                        'korean-accent': '#FF6B35'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <style>
+        :root {
+            --korean-blue: #001B3A;
+            --korean-light-blue: #0066CC;
+            --korean-silver: #E8F4FD;
+            --korean-accent: #FF6B35;
+            --gradient-primary: linear-gradient(135deg, #001B3A 0%, #0066CC 100%);
+            --gradient-secondary: linear-gradient(135deg, #E8F4FD 0%, #ffffff 100%);
+            --shadow-primary: 0 20px 40px rgba(0, 27, 58, 0.15);
+            --shadow-hover: 0 30px 60px rgba(0, 27, 58, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            color: var(--korean-blue);
+            font-weight: 400;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--korean-silver);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--korean-light-blue);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--korean-blue);
+        }
+
+        /* Floating Background Elements */
+        .floating-bg {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-1 {
+            top: 10%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0, 102, 204, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .floating-2 {
+            bottom: 20%;
+            left: 5%;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(15px) rotate(240deg); }
+        }
+
+        /* Header Styles */
+        .header-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 27, 58, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .header-scrolled {
+            background: rgba(0, 27, 58, 0.95);
+            color: white;
+        }
+
+        /* Navigation - Desktop */
+        .nav-item {
+            position: relative;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            font-size: 0.875rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-primary);
+            border-radius: 25px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .nav-item:hover::before,
+        .nav-item.active::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, rgba(0, 27, 58, 0.98) 0%, rgba(0, 102, 204, 0.98) 100%);
+            backdrop-filter: blur(20px);
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-item {
+            color: white;
+            transition: all 0.3s ease;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            display: block;
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .mobile-nav-item:hover {
+            color: var(--korean-accent);
+            transform: translateX(10px);
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            padding: 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(0, 27, 58, 0.1);
+        }
+
+        /* Premium Button Styles */
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            font-size: 0.875rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-primary);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            min-height: 48px;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #0066CC 0%, #001B3A 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-primary > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--korean-blue);
+            padding: 16px 32px;
+            border: 2px solid var(--korean-light-blue);
+            border-radius: 50px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            font-size: 0.875rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 48px;
+        }
+
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-primary);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .btn-secondary:hover::before {
+            transform: translateX(0);
+        }
+
+        .btn-secondary:hover {
+            color: white;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-primary);
+        }
+
+        .btn-secondary > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Premium Card Styles */
+        .premium-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid rgba(0, 27, 58, 0.1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 27, 58, 0.08);
+        }
+
+        .premium-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .premium-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-secondary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 20px;
+        }
+
+        .premium-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: transparent;
+        }
+
+        .premium-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .premium-card:hover::after {
+            opacity: 1;
+        }
+
+        .premium-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Advanced Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9) rotate(5deg);
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        .reveal-slide-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-slide-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-slide-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-slide-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Hero Gradient Text */
+        .hero-gradient {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .hero-gradient::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Stats Counter Animation */
+        .stat-number {
+            font-weight: 900;
+            font-size: 2.5rem;
+            color: var(--korean-light-blue);
+            display: block;
+            line-height: 1;
+        }
+
+        /* Icon Animations */
+        .icon-float {
+            animation: iconFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Mobile Responsive Improvements */
+        @media (max-width: 768px) {
+            .floating-1, .floating-2 {
+                display: none;
+            }
+            
+            .premium-card {
+                padding: 24px;
+                border-radius: 16px;
+            }
+            
+            .btn-primary, .btn-secondary {
+                padding: 14px 28px;
+                font-size: 0.875rem;
+                min-height: 44px;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            /* Header improvements for mobile */
+            .header-glass {
+                padding: 0;
+            }
+            
+            /* Better touch targets */
+            .mobile-nav-item {
+                padding: 20px 0;
+                font-size: 1.25rem;
+                min-height: 60px;
+                display: flex;
+                align-items: center;
+            }
+            
+            /* Logo improvements */
+            .logo {
+                font-size: 1.5rem !important;
+                font-weight: 900;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .premium-card {
+                padding: 20px;
+                border-radius: 12px;
+            }
+            
+            .btn-primary, .btn-secondary {
+                padding: 12px 24px;
+                font-size: 0.8rem;
+                min-height: 40px;
+            }
+            
+            .stat-number {
+                font-size: 1.75rem;
+            }
+        }
+
+        /* Ensure text is readable on all devices */
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+            
+            h1 {
+                font-size: 2.5rem !important;
+                line-height: 1.2;
+            }
+            
+            h2 {
+                font-size: 2rem !important;
+                line-height: 1.3;
+            }
+            
+            h3 {
+                font-size: 1.5rem !important;
+                line-height: 1.4;
+            }
+            
+            p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem !important;
+            }
+            
+            h2 {
+                font-size: 1.75rem !important;
+            }
+            
+            h3 {
+                font-size: 1.25rem !important;
+            }
+        }
+
+        /* Fix layout issues on mobile */
+        .container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Elements -->
+    <div class="floating-bg floating-1"></div>
+    <div class="floating-bg floating-2"></div>
+
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 header-glass">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center h-16 sm:h-20">
+                <div class="logo text-xl sm:text-2xl font-black tracking-tight">
+                    <span class="hero-gradient">Y.I</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center space-x-1 xl:space-x-2">
+                    <a href="index.html" class="nav-item active">ホーム</a>
+                    <a href="profile.html" class="nav-item">プロフィール</a>
+                    <a href="works.html" class="nav-item">研究・業績</a>
+                    <a href="achievements.html" class="nav-item">受賞・認定</a>
+                    <a href="skills.html" class="nav-item">専門分野</a>
+                    <a href="news.html" class="nav-item">ニュース</a>
+                    <a href="contact.html" class="nav-item">お問い合わせ</a>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="mobile-menu-btn lg:hidden">
+                    <svg class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-y-0 right-0 w-full z-40 lg:hidden">
+        <div class="p-6 pt-24">
+            <nav class="space-y-0">
+                <a href="index.html" class="mobile-nav-item">ホーム</a>
+                <a href="profile.html" class="mobile-nav-item">プロフィール</a>
+                <a href="works.html" class="mobile-nav-item">研究・業績</a>
+                <a href="achievements.html" class="mobile-nav-item">受賞・認定</a>
+                <a href="skills.html" class="mobile-nav-item">専門分野</a>
+                <a href="news.html" class="mobile-nav-item">ニュース</a>
+                <a href="contact.html" class="mobile-nav-item">お問い合わせ</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="min-h-screen flex items-center justify-center px-4 pt-20 relative overflow-hidden">
+            <div class="container mx-auto max-w-6xl">
+                <div class="text-center">
+                    <div class="reveal mb-6">
+                        <div class="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-korean-light-blue/20 mb-6">
+                            <div class="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
+                            <span class="text-sm font-semibold text-korean-blue">ようこそ！ MyProfileへ</span>
+                        </div>
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6">
+                        <span class="block reveal" style="animation-delay: 0.2s;">データを読み解き</span>
+                        <span class="block hero-gradient reveal" style="animation-delay: 0.4s;">未来を創造する</span>
+                    </h1>
+                    
+                    <p class="text-lg sm:text-xl text-korean-blue/70 max-w-3xl mx-auto mb-8 reveal leading-relaxed" style="animation-delay: 0.6s;">
+                        長崎県立大学大学院 情報工学専攻<br>
+                        <span class="font-semibold text-korean-light-blue">機械学習・データサイエンス</span>の研究に従事
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center reveal" style="animation-delay: 0.8s;">
+                        <a href="works.html" class="btn-primary">
+                            <span>研究成果を見る</span>
+                            <i data-feather="arrow-right" class="w-5 h-5"></i>
+                        </a>
+                        <a href="contact.html" class="btn-secondary">
+                            <span>お問い合わせ</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Floating Stats -->
+                <div class="absolute top-1/2 left-4 transform -translate-y-1/2 hidden xl:block">
+                    <div class="reveal-slide-left bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-korean-light-blue/10" style="animation-delay: 1s;">
+                        <div class="stat-number" data-target="8">0</div>
+                        <p class="text-sm font-semibold text-korean-blue/70">年間論文数</p>
+                    </div>
+                </div>
+                
+                <div class="absolute top-1/2 right-4 transform -translate-y-1/2 hidden xl:block">
+                    <div class="reveal-slide-right bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-korean-light-blue/10" style="animation-delay: 1.2s;">
+                        <div class="stat-number" data-target="150">0</div>
+                        <p class="text-sm font-semibold text-korean-blue/70">引用回数</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="py-16 sm:py-20 md:py-32 bg-gradient-to-br from-korean-silver/30 to-white relative">
+            <div class="container mx-auto max-w-6xl">
+                <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                    <div class="order-2 lg:order-1">
+                        <div class="reveal-scale relative">
+                            <img src="myprofile.jpg" 
+                                 alt="TP1" 
+                                 class="rounded-2xl shadow-2xl w-full transform hover:scale-105 transition-transform duration-500">
+                            <div class="absolute -bottom-4 -right-4 w-20 h-20 bg-korean-accent rounded-2xl flex items-center justify-center shadow-xl">
+                                <i data-feather="zap" class="w-10 h-10 text-white icon-float"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-1 lg:order-2">
+                        <div class="reveal mb-6">
+                            <span class="inline-block px-4 py-2 bg-korean-light-blue/10 text-korean-light-blue rounded-full text-sm font-bold mb-4">
+                                研究について
+                            </span>
+                            <h2 class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 leading-tight">
+                                データサイエンスで<br>
+                                <span class="hero-gradient">社会課題を解決</span>
+                            </h2>
+                        </div>
+                        
+                        <p class="text-lg text-korean-blue/80 leading-relaxed mb-8 reveal" style="animation-delay: 0.2s;">
+                            データサイエンスの力で、社会に潜む問題を見える化し、改善へのヒントを見つけ出す研究をしています。<br>
+                            研究を通じて、データの持つ力を最大限に引き出し、実社会に貢献することを目指しています。
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-6 reveal" style="animation-delay: 0.4s;">
+                            <div class="text-center p-4 bg-white rounded-2xl shadow-lg border border-korean-light-blue/10">
+                                <div class="text-3xl font-black text-korean-light-blue mb-2" data-target="0">0</div>
+                                <p class="text-korean-blue/70 font-semibold text-sm">準備中</p>
+                            </div>
+                            <div class="text-center p-4 bg-white rounded-2xl shadow-lg border border-korean-light-blue/10">
+                                <div class="text-3xl font-black text-korean-light-blue mb-2" data-target="0">0</div>
+                                <p class="text-korean-blue/70 font-semibold text-sm">共同研究数</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Areas Section -->
+        <section class="py-16 sm:py-20 md:py-32 relative">
+            <div class="container mx-auto max-w-6xl">
+                <div class="text-center mb-12 md:mb-20">
+                    <div class="reveal mb-6">
+                        <span class="inline-block px-4 py-2 bg-korean-accent/10 text-korean-accent rounded-full text-sm font-bold mb-4">
+                            研究分野
+                        </span>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black mb-6">専門領域</h2>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                    <div class="premium-card group reveal" style="animation-delay: 0s;">
+                        <div class="w-16 h-16 bg-gradient-to-br from-korean-light-blue to-korean-blue rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i data-feather="cpu" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">機械学習</h3>
+                        <p class="text-korean-blue/70 leading-relaxed">
+                            行動データに対する分類・回帰・クラスタリングなどの機械学習手法を応用。予測型システムの構築を目指す。
+                        </p>
+                    </div>
+                    
+                    <div class="premium-card group reveal" style="animation-delay: 0.1s;">
+                        <div class="w-16 h-16 bg-gradient-to-br from-korean-accent to-red-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i data-feather="bar-chart" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">データサイエンス</h3>
+                        <p class="text-korean-blue/70 leading-relaxed">
+                            地域・社会に関するアンケートやログデータの分析を通じて、行動パターンや傾向を明らかにし、社会課題の構造把握と意思決定支援に向けた研究。
+                        </p>
+                    </div>
+                    
+                    <div class="premium-card group reveal" style="animation-delay: 0.2s;">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i data-feather="layout" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">WEBサイト制作</h3>
+                        <p class="text-korean-blue/70 leading-relaxed">
+                            HTML・CSS・JavaScript・Firebaseを用いた教育・研究システムの設計・開発を行い、ユーザー視点のインターフェースとデータ連携を重視した実装を行っています。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section class="py-16 sm:py-20 md:py-32 bg-gradient-to-br from-korean-blue to-korean-light-blue relative overflow-hidden">
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+            
+            <div class="container mx-auto max-w-6xl relative z-10">
+                <div class="text-center mb-12 md:mb-20">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6 reveal">
+                        主な実績
+                    </h2>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <a href="achievements.html" class="group bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-white/20 transition-all duration-300 reveal border border-white/20">
+                        <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                            <i data-feather="award" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">学術賞受賞</h3>
+                        <div class="text-2xl font-black text-white" data-target="0">0</div>
+                    </a>
+                    
+                    <a href="works.html" class="group bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-white/20 transition-all duration-300 reveal border border-white/20" style="animation-delay: 0.1s;">
+                        <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                            <i data-feather="book" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">論文発表</h3>
+                        <div class="text-2xl font-black text-white" data-target="0">0</div>
+                    </a>
+                    
+                    <a href="works.html" class="group bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-white/20 transition-all duration-300 reveal border border-white/20" style="animation-delay: 0.2s;">
+                        <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                            <i data-feather="users" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">産学連携</h3>
+                        <div class="text-2xl font-black text-white" data-target="0">0</div>
+                    </a>
+                    
+                    <a href="contact.html" class="group bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-white/20 transition-all duration-300 reveal border border-white/20" style="animation-delay: 0.3s;">
+                        <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                            <i data-feather="globe" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">地域連携</h3>
+                        <div class="text-2xl font-black text-white" data-target="0">0</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-korean-blue text-white py-12 md:py-16 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-korean-blue via-korean-light-blue to-korean-blue opacity-50"></div>
+        <div class="container mx-auto text-center relative z-10">
+            <p class="text-white/60 font-medium text-sm">
+                &copy; 2025 YuyaIkeda. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Feather Icons
+        feather.replace();
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.querySelector('.menu-icon');
+        const closeIcon = document.querySelector('.close-icon');
+
+        function toggleMobileMenu() {
+            const isOpen = mobileMenu.classList.contains('active');
+            if (isOpen) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        }
+
+        function openMobileMenu() {
+            mobileMenu.classList.add('active');
+            menuIcon.classList.add('hidden');
+            closeIcon.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        }, { passive: true });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const animationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        // Counter Animation
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const counter = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target;
+                    clearInterval(counter);
+                } else {
+                    element.textContent = Math.floor(start);
+                }
+            }, 16);
+        }
+
+        // Initialize counters when visible
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                    const target = parseInt(entry.target.dataset.target);
+                    animateCounter(entry.target, target);
+                    entry.target.classList.add('counted');
+                }
+            });
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Observe animation elements
+            const elementsToAnimate = document.querySelectorAll('.reveal, .reveal-scale, .reveal-slide-left, .reveal-slide-right');
+            elementsToAnimate.forEach(el => {
+                animationObserver.observe(el);
+            });
+
+            // Observe counter elements
+            const counters = document.querySelectorAll('[data-target]');
+            counters.forEach(counter => {
+                counterObserver.observe(counter);
+            });
+        });
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+
+        // Touch event handling for mobile
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', e => {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            if (touchEndY < touchStartY - 50) {
+                // Swipe up
+                if (mobileMenu.classList.contains('active')) {
+                    closeMobileMenu();
+                }
+            }
+            if (touchEndY > touchStartY + 50) {
+                // Swipe down - could be used for other interactions
+            }
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
